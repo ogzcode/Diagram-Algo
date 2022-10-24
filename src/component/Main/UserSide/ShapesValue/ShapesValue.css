@@ -3,3 +3,131 @@
     width: 100%;
     border-top: 1px solid rgb(190, 190, 190);
 }
+
+.variable {
+    padding: 2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: .25rem;
+    color: #575757;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.variable input {
+    width: 100%;
+    padding: .25rem .5rem;
+    outline: none;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0,0,0,.1);
+    border-radius: .25rem;
+    border: none;
+    color: #575757;
+}
+
+.box {
+    margin-bottom: 1rem;
+}
+
+.btn {
+    text-transform: uppercase;
+    padding: .25rem 1rem;
+    color: white;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: scale(.9);
+}
+
+.delete {
+    float: right;
+    background-color: rgb(236, 14, 51);
+}
+
+.create {
+    background-color: #13b913;
+}
+
+.input__box {
+    padding: 2rem;
+}
+
+.expr__box {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.expr__box input {
+    padding: .25rem .5rem;
+    outline: none;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0,0,0,.1);
+    border-radius: .25rem;
+    border: none;
+    color: #575757;
+
+}
+
+.expr__box span {
+    margin: 0px .5rem;
+}
+
+.equal__var {
+    width: 50%;
+}
+
+.flow__box {
+    padding: 2rem;
+    
+}
+
+.flow__box input {
+    width: 100%;
+    padding: .25rem .5rem;
+    outline: none;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0,0,0,.1);
+    border-radius: .25rem;
+    border: none;
+    color: #575757;
+}
+
+.loop__box {
+    padding: 2rem;
+}
+
+.loop__box > div {
+    margin-bottom: 1rem;
+}
+
+.loop__box div:first-child input {
+    margin: .25rem 0;
+}
+.loop__box input {
+    width: 100%;
+    padding: .25rem .5rem;
+    outline: none;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0,0,0,.1);
+    border-radius: .25rem;
+    border: none;
+    color: #575757;   
+}
+
+.print__box {
+    padding: 2rem;
+}
+
+.print__box input {
+    width: 100%;
+    padding: .25rem .5rem;
+    outline: none;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, .2), 0px 0px 6px rgba(0,0,0,.1);
+    border-radius: .25rem;
+    border: none;
+    color: #575757;
+}
