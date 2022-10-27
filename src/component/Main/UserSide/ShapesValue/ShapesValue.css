@@ -131,3 +131,7 @@ label {
     border: none;
     color: #575757;
 }
+
+.input__error {
+    border: 1px solid red !important;
+}

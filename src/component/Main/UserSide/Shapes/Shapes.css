@@ -15,7 +15,7 @@
     width: 32px;
     height: 32px;
     border: none;
-    background-color: rgb(236, 14, 51);
+    background-color: #ec0e33;
 }
 
 .aritc {
@@ -45,6 +45,6 @@
     width: 32px;
     height: 32px;
     border: none;
-    background-color: rgb(255, 92, 168);
+    background-color: #ff5ca8;
     border-radius: 50%;
 }

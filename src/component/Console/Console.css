@@ -1,0 +1,29 @@
+.console {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 40vh;
+    width: 75vw;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, .1);
+    z-index: 0;
+    overflow: hidden;
+}
+
+.text__field {
+    background-color: #eeeeee;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.close__btn {
+    padding: .25rem 1.5rem;
+    border: none;
+    background-color: #ec0e33;
+    cursor: pointer;
+    color: white;
+}
+
+.close__btn:hover {
+    opacity: .9;;
+}
