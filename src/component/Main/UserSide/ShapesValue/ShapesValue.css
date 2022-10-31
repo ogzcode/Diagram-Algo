@@ -71,7 +71,6 @@ label {
     border-radius: .25rem;
     border: none;
     color: #575757;
-
 }
 
 .expr__box span {
@@ -79,7 +78,11 @@ label {
 }
 
 .equal__var {
-    width: 50%;
+    width: 25%;
+}
+
+.expr__box .operation{
+    width: 75%;
 }
 
 .flow__box {
@@ -95,6 +98,7 @@ label {
     border-radius: .25rem;
     border: none;
     color: #575757;
+    margin-bottom: 1rem;
 }
 
 .loop__box {
@@ -130,8 +134,4 @@ label {
     border-radius: .25rem;
     border: none;
     color: #575757;
-}
-
-.input__error {
-    border: 1px solid red !important;
 }

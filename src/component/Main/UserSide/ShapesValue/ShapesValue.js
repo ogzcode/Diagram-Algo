@@ -3,48 +3,8 @@ import "./ShapesValue.css";
 import ValueBtn from "./ValueBtn.js";
 import VariableInput from "./VariableInput.js";
 import PrintInput from "./PrintInput.js";
-
-class OperationInput extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleBtnClick = this.handleBtnClick.bind(this);
-    }
-    handleBtnClick(value){
-        console.log(value);
-    }
-    render(){
-        return (
-            <div className="input__box">
-                <label>Operation</label>
-                <div className="expr__box">
-                    <input type="text" className="equal__var"/>
-                    <span>=</span>
-                    <input type="text"/>
-                </div>
-                <ValueBtn onClick={this.handleBtnClick}/>
-            </div>
-        );
-    }
-}
-
-class ControlFlow extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleBtnClick = this.handleBtnClick.bind(this);
-    }
-    handleBtnClick(value){
-        console.log(value);
-    }
-    render(){
-        return (
-            <div className="flow__box">
-                <label>Control Statement</label>
-                <input type="text"/>
-                <ValueBtn onClick={this.handleBtnClick}/>
-            </div>
-        );
-    }
-}
+import OperationInput from "./OperationInput";
+import ControlFlow from "./ControlFlow";
 
 class LoopInput extends React.Component {
     constructor(props){
@@ -89,10 +49,10 @@ class ShapesValue extends React.Component {
             return <VariableInput onClick={this.getData}/>
         }
         else if(this.props.type === "operation"){
-            return <OperationInput/>
+            return <OperationInput onClick={this.getData}/>
         }
         else if (this.props.type === "statement"){
-            return <ControlFlow/>
+            return <ControlFlow onClick={this.getData}/>
         }
         else if (this.props.type === "loop"){
             return <LoopInput/>

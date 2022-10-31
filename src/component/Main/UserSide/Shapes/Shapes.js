@@ -1,17 +1,6 @@
 import React from "react";
 import "./Shapes.css";
 
-//ref kullanımı
-/*
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.myRef = React.createRef();  }
-  render() {
-    return <div ref={this.myRef} />;  }
-}
-*/
-
 class Shapes extends React.Component {
   constructor(props) {
     super(props);

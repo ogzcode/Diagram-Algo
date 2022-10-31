@@ -25,13 +25,20 @@ class Canvas extends React.Component {
             height: this.root.current.parentElement.offsetHeight
         });
     }
-    componentDidUpdate(){
+    componentDidUpdate(prevProps){
         if (this.props.data.length > this.state.shapeList.length){
             const d = this.drawShapes();
             this.setState({
                 shapeList: d.shapeList,
                 originX: d.originX,
                 originY: d.originY
+            });
+        }
+        else if (this.props.data.length < prevProps.data.length){
+            this.setState({
+                shapeList: [],
+                originX: 450,
+                originY: 20
             });
         }
     }
@@ -66,8 +73,37 @@ class Canvas extends React.Component {
                 />
             );
         }
+        else if (data.type === "operation"){
+            shape = (
+                <Rect
+                    x={originX - RECT_SIZE / 2}
+                    y={originY}
+                    width={RECT_SIZE * 2}
+                    height={RECT_SIZE}
+                    fill="#f7e600"
+                    key={originY}
+                />
+            );
+        }
+        else if (data.type === "statement"){
+            shape = (
+                <Rect
+                    x={originX + (RECT_SIZE / 2) / Math.pow(2, 1/2) + 5}
+                    y={originY}
+                    width={RECT_SIZE}
+                    height={RECT_SIZE}
+                    fill="#13b913"
+                    rotation={45}
+                    key={originY}
+                />
+            );
+        }
         shapeList.push(shape);
         originY += RECT_SIZE + SHAPE_MARGIN;
+
+        if (data.type === "statement"){
+            originY += 10;
+        }
 
         return {
             shapeList: shapeList,

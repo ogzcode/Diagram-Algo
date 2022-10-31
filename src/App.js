@@ -13,12 +13,15 @@ class App extends React.Component {
     };
     this.handleGetData = this.handleGetData.bind(this);
     this.handleRun = this.handleRun.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   handleRun(value){
-    console.log(value);
     this.setState({
       run: value
     });
+  }
+  handleDelete(){
+    this.setState({data: []});
   }
   handleGetData(data){
     this.setState({data: data});
@@ -26,10 +29,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavBar onClick={this.handleRun}/>
-        <Main onClick={this.handleGetData}/>
+        <NavBar onClick={this.handleRun} onDelete={this.handleDelete}/>
+        <Main onClick={this.handleGetData} data={this.state.data}/>
         {
-          this.state.run && <Console onClick={this.handleRun}/>
+          this.state.run && <Console onClick={this.handleRun} data={this.state.data}/>
         }
       </div>
     );

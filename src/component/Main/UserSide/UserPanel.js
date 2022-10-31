@@ -24,6 +24,12 @@ class UserPanel extends React.Component {
         }
         data["type"] = this.state.objectType;
         this.props.onClick(data);
+        /*
+            Print: value, type
+            Variable: value, type, name
+            Operation: type, result, prosses
+            Control Flow: type, control, isTrue, isFalse
+        */
     }
     render() {
         return (

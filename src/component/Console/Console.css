@@ -7,6 +7,7 @@
     box-shadow: 0px -2px 4px rgba(0, 0, 0, .1);
     z-index: 0;
     overflow: hidden;
+    background-color: white;
 }
 
 .text__field {
@@ -26,4 +27,12 @@
 
 .close__btn:hover {
     opacity: .9;;
+}
+
+p {
+    padding: .5rem 1rem;
+}
+
+p:nth-child(even) {
+    background-color: white;
 }

@@ -14,7 +14,7 @@ class VariableInput extends React.Component {
         this.handleNameChange = this.handleNameChange.bind(this);
     }
     handleBtnClick(value){
-        if (value){
+        if (value && this.state.value && this.state.name){
             this.props.onClick({
                 name: this.state.name,
                 value: this.state.value

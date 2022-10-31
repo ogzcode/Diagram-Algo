@@ -14,7 +14,7 @@
     color: #0daf50;
 }
 
-.run__btn {
+.nav__btn {
     padding: .5rem 1.5rem;
     background-color: #0daf50;
     color: #fff;
@@ -25,6 +25,15 @@
     letter-spacing: 1px;
 }
 
-.run__btn:hover {
+.nav__btn:hover {
     opacity: .8;
+}
+
+.run--btn {
+    background-color: #0daf50;
+}
+
+.delete--btn {
+    background-color: #ec0e33;
+    margin-left: 1rem;
 }
