@@ -4,7 +4,7 @@ function prec(x) {
     if (x === "+" || x === "-") {
         return 1;
     }
-    else if (x === "*" || x === "/") {
+    else if (x === "*" || x === "/" || x === "%") {
         return 2;
     }
     else {
@@ -38,7 +38,6 @@ function infixToPostfix(state) {
         resultList.push(stack[stack.length - 1]);
         stack.pop();
     }
-    console.log(resultList);
 
     return resultList;
 }
@@ -51,9 +50,9 @@ function calcExpression(ex, variableList) {
         if (n) {
             stack.push(n);
         }
-        else if ("+-*/".includes(i)) {
-            let numberOne = stack.pop();
+        else if ("+-*/%".includes(i)) {
             let numberTwo = stack.pop();
+            let numberOne = stack.pop();
 
             if (i === "+") {
                 stack.push(numberOne + numberTwo);
@@ -66,6 +65,9 @@ function calcExpression(ex, variableList) {
             }
             else if (i === "/") {
                 stack.push(numberOne / numberTwo);
+            }
+            else if (i === "%") {
+                stack.push(numberOne % numberTwo);
             }
         }
         else {
