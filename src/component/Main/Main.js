@@ -7,17 +7,23 @@ class Main extends React.Component {
     constructor(props){
         super(props);
         this.handleShapeData = this.handleShapeData.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
     handleShapeData(value){
-        const data = this.props.data.slice();
-        data.push(value);
-        this.props.onClick(data);
+        this.props.onClick(value);
+    }
+    handleClick(value){
+        this.props.onLoopClick(value);
     }
     render(){
         return (
             <div className="main">
                 <UserPanel onClick={this.handleShapeData}/>
-                <Canvas data={this.props.data}/>
+                <Canvas 
+                    data={this.props.data} 
+                    onLoopClick={this.handleClick} 
+                    loopState={this.props.loopState}
+                />
             </div>
         );
     }

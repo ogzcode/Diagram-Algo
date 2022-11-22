@@ -1,9 +1,9 @@
 import React from "react";
 import "./Console.css";
 import tokenizeForPrint from "./Function/tokenizeForPrint";
-import isVariable from "./Function/isVariable";
 import tokenizeForOperation from "./Function/tokenizeForOperation";
 import tokenizeForCondition from "./Function/tokenizeForCondition";
+import tokenizeForLoop from "./Function/tokenizeForLoop";
 
 class Console extends React.Component {
     constructor(props) {
@@ -59,6 +59,13 @@ class Console extends React.Component {
                     printTextList.push(res);
                 }
             }
+            else if (d.type === "loop"){
+                let res = tokenizeForLoop(d, variableList);
+
+                if (res === false){
+                    printTextList.push("Loop Error");
+                }
+            }
         }
 
         this.setState({
@@ -73,7 +80,7 @@ class Console extends React.Component {
                 <div className="text__field">
                     {
                         this.state.printTextList.map((text, index) => (
-                            <p key={index}>{index}:  {text}</p>
+                            <p key={index}>{index}:    {text}</p>
                         ))
                     }
                 </div>

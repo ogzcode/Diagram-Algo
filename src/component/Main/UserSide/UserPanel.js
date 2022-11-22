@@ -29,6 +29,7 @@ class UserPanel extends React.Component {
             Variable: value, type, name
             Operation: type, result, prosses
             Control Flow: type, control, isTrue, isFalse
+            Loop: value(end) type 
         */
     }
     render() {

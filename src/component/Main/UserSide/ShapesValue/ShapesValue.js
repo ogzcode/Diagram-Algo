@@ -1,40 +1,10 @@
 import React from "react";
 import "./ShapesValue.css";
-import ValueBtn from "./ValueBtn.js";
 import VariableInput from "./VariableInput.js";
 import PrintInput from "./PrintInput.js";
 import OperationInput from "./OperationInput";
 import ControlFlow from "./ControlFlow";
-
-class LoopInput extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleBtnClick = this.handleBtnClick.bind(this);
-    }
-    handleBtnClick(value){
-        console.log(value);
-    }
-    render() {
-        return (
-            <div className="loop__box">
-                <div>
-                    <label>Loop Variable</label>
-                    <input type="text" placeholder="Enter loop variable name"/>
-                    <input type="text" placeholder="Enter loop variable value"/>
-                </div>
-                <div>
-                    <label>Loop Condition</label>
-                    <input type="text"/>
-                </div>
-                <div>
-                    <label>Loop Step</label>
-                    <input type="number" min="0" max="10"/>
-                </div>
-                <ValueBtn onClick={this.handleBtnClick}/>
-            </div>
-        );
-    }
-}
+import LoopInput from "./LoopInput";
 
 class ShapesValue extends React.Component {
     constructor(props){
@@ -55,7 +25,7 @@ class ShapesValue extends React.Component {
             return <ControlFlow onClick={this.getData}/>
         }
         else if (this.props.type === "loop"){
-            return <LoopInput/>
+            return <LoopInput onClick={this.getData}/>
         }
         else if (this.props.type === "print"){
             return <PrintInput onClick={this.getData}/>

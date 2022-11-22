@@ -9,11 +9,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       run: false,
-      data: []
+      data: [],
+      loopState: false
     };
     this.handleGetData = this.handleGetData.bind(this);
     this.handleRun = this.handleRun.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleLoop = this.handleLoop.bind(this);
   }
   handleRun(value){
     this.setState({
@@ -23,14 +25,38 @@ class App extends React.Component {
   handleDelete(){
     this.setState({data: []});
   }
-  handleGetData(data){
+  handleGetData(value){
+    const data = this.state.data.slice();
+
+    if (this.state.loopState && data[data.length - 1].type === "loop"){
+      if (value.type === "operation"){
+        data[data.length - 1].statements.push(value);
+      }
+      else {
+        this.setState({loopState: false});
+        data.push(value);
+      }
+    }
+    else {
+      data.push(value);
+    }
+    //console.log(data);
     this.setState({data: data});
+  }
+  handleLoop(value){
+    this.setState({
+      loopState: value
+    });
   }
   render() {
     return (
       <div className="App">
         <NavBar onClick={this.handleRun} onDelete={this.handleDelete}/>
-        <Main onClick={this.handleGetData} data={this.state.data}/>
+        <Main onClick={this.handleGetData} 
+          data={this.state.data} 
+          loopState={this.state.loopState}
+          onLoopClick={this.handleLoop}
+        />
         {
           this.state.run && <Console onClick={this.handleRun} data={this.state.data}/>
         }
