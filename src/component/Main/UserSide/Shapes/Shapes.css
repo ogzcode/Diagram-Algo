@@ -5,46 +5,157 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .shapes > * {
     margin-right: 16px;
     cursor: pointer;
 }
-.rect {
+
+.panel__name {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #696969;
+}
+
+.variable__btn {
     width: 32px;
     height: 32px;
     border: none;
     background-color: #ec0e33;
+    position: relative;
 }
 
-.aritc {
+.variable__btn::before {
+    content: "Değişken";
+    position: absolute;
+    top: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,.2);
+    background-color: white;
+    padding: .25rem .5rem;
+    display: none;
+    border-radius: 4px;
+    color: rgb(71, 71, 71);
+}
+
+.variable__btn:hover::before {
+    display: block;
+}
+
+.operation__btn {
     width: 64px;
     height: 32px;
     border: none;
     background-color: #f7e600;
+    position: relative;
 }
 
-.if {
+.operation__btn::before {
+    content: "İşlem";
+    position: absolute;
+    top: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,.2);
+    background-color: white;
+    padding: .25rem .5rem;
+    display: none;
+    border-radius: 4px;
+    color: rgb(71, 71, 71);
+}
+
+.operation__btn:hover::before {
+    display: block;
+}
+
+.condition__btn {
     width: 24px;
     height: 24px;
     border: none;
     background-color: #13b913;
     transform: rotate(45deg);
+    position: relative;
 }
 
-.cycle {
+.condition__btn::before {
+    content: "Koşul";
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: rotate(-45deg);
+    font-size: 10px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,.2);
+    background-color: white;
+    padding: .25rem .5rem;
+    display: none;
+    border-radius: 4px;
+    color: rgb(71, 71, 71);
+}
+
+.condition__btn:hover::before {
+    display: block;
+}
+
+.loop__btn {
     width: 64px;
     height: 32px;
     border: none;
     border-radius: 20px;
     background-color: #5555df;
+    position: relative;
 }
 
-.print {
+.loop__btn::before {
+    content: "Döngü";
+    position: absolute;
+    top: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,.2);
+    background-color: white;
+    padding: .25rem .5rem;
+    display: none;
+    border-radius: 4px;
+    color: rgb(71, 71, 71);
+}
+
+.loop__btn:hover::before {
+    display: block;
+}
+
+.print__btn {
     width: 32px;
     height: 32px;
     border: none;
     background-color: #ff5ca8;
     border-radius: 50%;
+    position: relative;
+}
+
+.print__btn::before {
+    content: "Çıktı";
+    position: absolute;
+    top: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,.2);
+    background-color: white;
+    padding: .25rem .5rem;
+    display: none;
+    border-radius: 4px;
+    color: rgb(71, 71, 71);
+}
+
+.print__btn:hover::before {
+    display: block;
 }

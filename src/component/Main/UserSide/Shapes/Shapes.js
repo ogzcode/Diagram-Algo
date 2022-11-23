@@ -13,11 +13,12 @@ class Shapes extends React.Component {
   render() {
     return (
       <div className="shapes">
-        <button className="rect" onClick={() => this.handleClick("variable")}></button>
-        <button className="aritc" onClick={() => this.handleClick("operation")}></button>
-        <button className="if" onClick={() => this.handleClick("statement")}></button>
-        <button className="cycle" onClick={() => this.handleClick("loop")}></button>
-        <button className="print" onClick={() => this.handleClick("print")}></button>
+        <h3 className="panel__name">İşlemler</h3>
+        <button className="variable__btn" onClick={() => this.handleClick("variable")}></button>
+        <button className="operation__btn" onClick={() => this.handleClick("operation")}></button>
+        <button className="condition__btn" onClick={() => this.handleClick("statement")}></button>
+        <button className="loop__btn" onClick={() => this.handleClick("loop")}></button>
+        <button className="print__btn" onClick={() => this.handleClick("print")}></button>
       </div>
     );
   }
