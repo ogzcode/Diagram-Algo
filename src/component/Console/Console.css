@@ -29,11 +29,11 @@
     opacity: .9;;
 }
 
-p {
+.text__field p {
     padding: .5rem 1rem;
     color: #616161;
 }
 
-p:nth-child(even) {
+.text__field p:nth-child(even) {
     background-color: white;
 }

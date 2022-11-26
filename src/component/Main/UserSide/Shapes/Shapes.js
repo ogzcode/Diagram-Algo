@@ -1,6 +1,20 @@
 import React from "react";
 import "./Shapes.css";
 
+class ShapeBtn extends React.Component {
+  render(){
+    return (
+      <div>
+        <p>{this.props.name}</p>
+        <button 
+          className={`${this.props.value}__btn`} 
+          onClick={() => this.props.onClick(this.props.value)}>  
+        </button>
+      </div>
+    );
+  }
+}
+
 class Shapes extends React.Component {
   constructor(props) {
     super(props);
@@ -10,15 +24,22 @@ class Shapes extends React.Component {
   handleClick(type) {
     this.props.onClick(type);
   }
+  getShapeBtn(){
+    return [
+      ["Değişken", "variable"],
+      ["İşlem", "operation"],
+      ["Koşul", "statement"],
+      ["Döngü", "loop"],
+      ["Yazdır", "print"]
+    ].map((elem, index) => <ShapeBtn name={elem[0]} value={elem[1]} onClick={this.handleClick} key={index}/>);
+  }
   render() {
     return (
       <div className="shapes">
         <h3 className="panel__name">İşlemler</h3>
-        <button className="variable__btn" onClick={() => this.handleClick("variable")}></button>
-        <button className="operation__btn" onClick={() => this.handleClick("operation")}></button>
-        <button className="condition__btn" onClick={() => this.handleClick("statement")}></button>
-        <button className="loop__btn" onClick={() => this.handleClick("loop")}></button>
-        <button className="print__btn" onClick={() => this.handleClick("print")}></button>
+        <div className="btn__container">
+          {this.getShapeBtn()}
+        </div>
       </div>
     );
   }
