@@ -4,6 +4,46 @@
     border-top: 1px solid rgb(190, 190, 190);
 }
 
+.error__box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, .2);
+    border-radius: 4px;
+    padding: 1rem 4rem;
+}
+
+.error__box p {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 32px;
+    color: rgb(255, 37, 37);
+    text-transform: uppercase;
+}
+
+.error__box li {
+    color: gray;
+    font-size: 12px;
+    margin-bottom: .5rem;
+    text-decoration: underline;
+}
+
+
+.error__box button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    background-color: red;
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 0px 4px 0px 0px;
+    cursor: pointer;
+}
+
 .variable {
     padding: 2rem;
 }

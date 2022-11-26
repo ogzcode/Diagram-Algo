@@ -7,11 +7,13 @@ class VariableInput extends React.Component {
         super(props);
         this.state = {
             name: "",
-            value: ""
+            value: "",
+            errorState: true
         };
         this.handleBtnClick = this.handleBtnClick.bind(this);
         this.handleValueChange = this.handleValueChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleErrorClick = this.handleErrorClick.bind(this);
     }
     handleBtnClick(value){
         if (value && this.state.value && this.state.name){
@@ -48,20 +50,33 @@ class VariableInput extends React.Component {
             });
         }
     }
+    handleErrorClick(){
+        let error = !this.state.errorState;
+        this.setState({errorState: error});
+    }
     render(){
         return (
             <div className="input__box variable">
+                <div className="error__box" style={{display: this.state.errorState ? "block" : "none"}}>
+                    <p>Hata!!!</p>
+                    <ul>
+                        <li>Değişken ismi a-z karakterlerinden oluşmalıdır</li>
+                        <li>Değişken değeri pozitif sayılardan oluşmalıdır</li>
+                    </ul>
+                    <button onClick={this.handleErrorClick}>X</button>
+                </div>
                 <div className="box">
-                    <label>Name</label>
+                    <label>DEĞİŞKEN İSMİ</label>
                     <input type="text" 
-                        placeholder="Enter name of variable" 
+                        placeholder="Değişkenin ismini giriniz" 
                         onChange={this.handleNameChange}
                         value={this.state.name}
                     />
                 </div>
                 <div className="box">
-                    <label>Variable</label>
-                    <input type="text" 
+                    <label>DEĞİŞKEN DEĞERİ</label>
+                    <input type="text"
+                        placeholder="Sayı giriniz"
                         onChange={this.handleValueChange}
                         value={this.state.value}
                     />

@@ -12,8 +12,8 @@ class ValueBtn extends React.Component {
     render(){
         return (
             <div className="btn__box">
-                <button className="btn create" onClick={() => this.handleBtnClick(true)}>Create</button>
-                <button className="btn delete" onClick={() => this.handleBtnClick(false)}>Delete</button>
+                <button className="btn create" onClick={() => this.handleBtnClick(true)}>Oluştur</button>
+                <button className="btn delete" onClick={() => this.handleBtnClick(false)}>Sil</button>
             </div>
         );
     }
