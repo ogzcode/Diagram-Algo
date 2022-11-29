@@ -1,5 +1,6 @@
 import React from "react";
 import ValueBtn from "./ValueBtn";
+import ErrorMessage from "./ErrorMessage";
 
 
 class VariableInput extends React.Component {
@@ -65,19 +66,11 @@ class VariableInput extends React.Component {
     render() {
         return (
             <div className="input__box variable">
-                <div className="error__box" style={{ display: this.state.errorState ? "block" : "none" }}>
-                    <div>
-                        <p>Hata!!!</p>
-                        <ul>
-                            {
-                                this.state.errorMessageList.map((message, i) =>
-                                    <li key={i}>{message}</li>
-                                )
-                            }
-                        </ul>
-                        <button onClick={this.handleErrorClick}>X</button>
-                    </div>
-                </div>
+                <ErrorMessage 
+                    errorState={this.state.errorState} 
+                    errorMessageList= {this.state.errorMessageList}
+                    onClick={this.handleErrorClick}
+                />
                 <div className="box">
                     <label>DEĞİŞKEN İSMİ</label>
                     <input type="text"
