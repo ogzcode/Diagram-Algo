@@ -110,9 +110,7 @@ label {
 }
 
 .expr__box {
-    display: flex;
-    width: 100%;
-    align-items: center;
+    margin-top: 1rem;
 }
 
 .expr__box input {
@@ -122,18 +120,12 @@ label {
     border-radius: .25rem;
     border: none;
     color: #575757;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
-.expr__box span {
-    margin: 0px .5rem;
-}
-
-.equal__var {
-    width: 25%;
-}
-
-.expr__box .operation{
-    width: 75%;
+.expr__box label {
+    font-size: 12px;
 }
 
 .flow__box {
