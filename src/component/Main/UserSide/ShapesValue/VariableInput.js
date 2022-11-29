@@ -3,45 +3,53 @@ import ValueBtn from "./ValueBtn";
 
 
 class VariableInput extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             name: "",
             value: "",
-            errorState: true
+            errorState: false,
+            errorMessageList: []
         };
         this.handleBtnClick = this.handleBtnClick.bind(this);
         this.handleValueChange = this.handleValueChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleErrorClick = this.handleErrorClick.bind(this);
     }
-    handleBtnClick(value){
-        if (value && this.state.value && this.state.name){
-            this.props.onClick({
-                name: this.state.name,
-                value: this.state.value
-            });
-        }
-        else {
-            this.props.onClick(value);
+    handleBtnClick(value) {
+        if (value) {
+            if (this.state.value && this.state.name) {
+                this.props.onClick({
+                    name: this.state.name,
+                    value: this.state.value
+                });
+            }
+            else {
+                this.setState({
+                    errorState: true,
+                    errorMessageList: ["Değişken ismi boş olamaz!", "Değişken değeri boş olamaz!"]
+                });
+            }
         }
         this.setState({
             value: "",
             name: ""
         });
     }
-    handleNameChange(e){
+    handleNameChange(e) {
         let value = e.target.value;
         this.setState({
             name: value
         });
     }
-    handleValueChange(e){
+    handleValueChange(e) {
         let value = parseInt(e.target.value);
 
-        if (!Number.isInteger(value) || isNaN(value)){
+        if (!Number.isInteger(value) || isNaN(value)) {
             this.setState({
-                value: ""
+                value: "",
+                errorState: true,
+                errorMessageList: ["Değişken değeri sayılardan oluşmalıdır!"]
             });
         }
         else {
@@ -50,25 +58,30 @@ class VariableInput extends React.Component {
             });
         }
     }
-    handleErrorClick(){
+    handleErrorClick() {
         let error = !this.state.errorState;
-        this.setState({errorState: error});
+        this.setState({ errorState: error, errorMessageList: [] });
     }
-    render(){
+    render() {
         return (
             <div className="input__box variable">
-                <div className="error__box" style={{display: this.state.errorState ? "block" : "none"}}>
-                    <p>Hata!!!</p>
-                    <ul>
-                        <li>Değişken ismi a-z karakterlerinden oluşmalıdır</li>
-                        <li>Değişken değeri pozitif sayılardan oluşmalıdır</li>
-                    </ul>
-                    <button onClick={this.handleErrorClick}>X</button>
+                <div className="error__box" style={{ display: this.state.errorState ? "block" : "none" }}>
+                    <div>
+                        <p>Hata!!!</p>
+                        <ul>
+                            {
+                                this.state.errorMessageList.map((message, i) =>
+                                    <li key={i}>{message}</li>
+                                )
+                            }
+                        </ul>
+                        <button onClick={this.handleErrorClick}>X</button>
+                    </div>
                 </div>
                 <div className="box">
                     <label>DEĞİŞKEN İSMİ</label>
-                    <input type="text" 
-                        placeholder="Değişkenin ismini giriniz" 
+                    <input type="text"
+                        placeholder="Değişkenin ismini giriniz"
                         onChange={this.handleNameChange}
                         value={this.state.name}
                     />
@@ -81,7 +94,7 @@ class VariableInput extends React.Component {
                         value={this.state.value}
                     />
                 </div>
-                <ValueBtn onClick={this.handleBtnClick}/>
+                <ValueBtn onClick={this.handleBtnClick} />
             </div>
         );
     }
