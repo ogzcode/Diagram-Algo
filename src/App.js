@@ -10,12 +10,14 @@ class App extends React.Component {
     this.state = {
       run: false,
       data: [],
-      loopState: false
+      loopState: false,
+      condState: false
     };
     this.handleGetData = this.handleGetData.bind(this);
     this.handleRun = this.handleRun.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleLoop = this.handleLoop.bind(this);
+    this.handleCond = this.handleCond.bind(this);
   }
   handleRun(value){
     this.setState({
@@ -23,7 +25,7 @@ class App extends React.Component {
     });
   }
   handleDelete(){
-    this.setState({data: []});
+    this.setState({data: [], loopState: false, condState: false});
   }
   handleGetData(value){
     const data = this.state.data.slice();
@@ -37,16 +39,25 @@ class App extends React.Component {
         data.push(value);
       }
     }
+    else if (this.state.condState && data[data.length - 1].type === "statement"){
+      if (value.type === "operation"){
+        data[data.length - 1].statements.push(value);
+      }
+      else {
+        this.setState({condState: false});
+        data.push(value);
+      }
+    }
     else {
       data.push(value);
     }
-    //console.log(data);
     this.setState({data: data});
   }
   handleLoop(value){
-    this.setState({
-      loopState: value
-    });
+    this.setState({loopState: value});
+  }
+  handleCond(value){
+    this.setState({condState: value});
   }
   render() {
     return (
@@ -56,6 +67,8 @@ class App extends React.Component {
           data={this.state.data} 
           loopState={this.state.loopState}
           onLoopClick={this.handleLoop}
+          condState={this.state.condState}
+          onCondClick={this.handleCond}
         />
         {
           this.state.run && <Console onClick={this.handleRun} data={this.state.data}/>

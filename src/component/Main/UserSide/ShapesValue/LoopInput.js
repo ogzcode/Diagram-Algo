@@ -1,18 +1,33 @@
 import React from "react";
 import ValueBtn from "./ValueBtn";
+import ErrorMessage from "./ErrorMessage";
 
 class LoopInput extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value: 0
+            value: 0,
+            errorState: false,
+            errorMessageList: []
         };
         this.handleBtnClick = this.handleBtnClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleErrorClick = this.handleErrorClick.bind(this);
     }
     handleBtnClick(value){
-        if (value && this.state.value > 0){
-            this.props.onClick({value: this.state.value, statements: []});
+        if (value){
+            if (this.state.value > 0){
+                this.props.onClick({value: this.state.value, statements: []});
+            }
+            else {
+                this.setState({
+                    errorState: true,
+                    errorMessageList: [
+                        "Döngü değeri boş bırakılamaz!", 
+                        "Döngü değeri pozitif sayı olmalıdır!"
+                    ]
+                });
+            }
         }
 
         this.setState({value: 0});
@@ -20,15 +35,24 @@ class LoopInput extends React.Component {
     handleChange(e){
         this.setState({value: e.target.value});
     }
+    handleErrorClick() {
+        let error = !this.state.errorState;
+        this.setState({ errorState: error, errorMessageList: [] });
+    }
     render() {
         return (
             <div className="loop__box">
+                <ErrorMessage 
+                    errorState={this.state.errorState} 
+                    errorMessageList= {this.state.errorMessageList}
+                    onClick={this.handleErrorClick}
+                />
                 <div>
-                    <label>End Value</label>
+                    <label>DÖNGÜ SAYISI</label>
                     <input type="number" 
-                        placeholder="Enter loop end value" 
                         value={this.state.value}
                         onChange={this.handleChange}
+                        placeholder="Döngü tekrar sayısı giriniz..."
                     />
                 </div>
                 <ValueBtn onClick={this.handleBtnClick}/>

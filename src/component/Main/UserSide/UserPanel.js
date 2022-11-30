@@ -18,17 +18,13 @@ class UserPanel extends React.Component {
     }
 
     handleShapeData(data){
-        if (!data){
-            //buraya verinin silinmesi gelecek
-            return;
-        }
         data["type"] = this.state.objectType;
         this.props.onClick(data);
         /*
             Print: value, type
             Variable: value, type, name
             Operation: type, result, prosses
-            Control Flow: type, control, isTrue, isFalse
+            Control Flow: type, control
             Loop: value(end) type 
         */
     }

@@ -66,7 +66,7 @@ class OperationInput extends React.Component {
                         className="equal__var" 
                         value={this.state.result} 
                         onChange={this.handleResult}
-                        placeholder="Değişken ismi giriniz..."
+                        placeholder="Tanımlı bir değişken ismi giriniz..."
                     />
                     <label>İŞLEM</label>
                     <input type="text" 

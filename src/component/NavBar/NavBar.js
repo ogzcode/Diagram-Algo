@@ -18,8 +18,8 @@ class NavBar extends React.Component{
             <div className="navbar">
                 <h1 className="logo">Diagram-Algo</h1>
                 <div>
-                    <button className="nav__btn run--btn" onClick={this.handleClickRun}>Run</button>
-                    <button className="nav__btn delete--btn" onClick={this.handleClickDelete}>Delete All</button>
+                    <button className="nav__btn run--btn" onClick={this.handleClickRun}>Çalıştır</button>
+                    <button className="nav__btn delete--btn" onClick={this.handleClickDelete}>Temizle</button>
                 </div>
             </div>
         );

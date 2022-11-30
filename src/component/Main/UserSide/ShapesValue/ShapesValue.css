@@ -178,3 +178,9 @@ label {
     border: none;
     color: #575757;
 }
+
+@media screen and (max-width: 1200px) {
+    .shapes__value {
+        height: 60%;
+    }
+}

@@ -2,58 +2,60 @@ import React from "react";
 import ValueBtn from "./ValueBtn";
 import ErrorMessage from "./ErrorMessage";
 
+function controlInput(input){
+    let splitInput = input.split(" ");
+
+    if (splitInput.length !== 3){
+        return [
+            "Hatalı giriş!",
+            "İfadelerin arasında boşluk olmalı.",
+            "Örnek Doğru Giriş: 'var1 > var2'.",
+            "En fazla 2 ifade kullanılabilir.",
+            "Koşul operatörleri : '>, <, !, ='"
+        ];
+    }
+}
+
 class ControlFlow extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             control: "",
-            isTrue: "",
-            isFalse: "",
             errorState: false,
             errorMessageList: []
         };
         this.handleBtnClick = this.handleBtnClick.bind(this);
         this.handleControlChange = this.handleControlChange.bind(this);
-        this.handleIsTrueChange = this.handleIsTrueChange.bind(this);
-        this.handleIsFalseChange = this.handleIsFalseChange.bind(this);
         this.handleErrorClick = this.handleErrorClick.bind(this);
-        
     }
     handleBtnClick(value){
         if (value){
-            if (this.state.isTrue && this.state.isFalse && this.state.control) {
-                this.props.onClick({
-                    control: this.state.control,
-                    isTrue: this.state.isTrue,
-                    isFalse: this.state.isFalse
-                });
+            if (this.state.control) {
+                let control = controlInput(this.state.control);
+                
+                if (control){
+                    this.setState({
+                        errorState: true,
+                        errorMessageList: control
+                    });
+                }
+                else {
+                    this.props.onClick({
+                        control: this.state.control,
+                        statements: []
+                    });
+                }
             }
             else {
                 this.setState({
                     errorState: true,
-                    errorMessageList: [
-                        "Koşul girişi boş bırakılamaz!", 
-                        "Doğru ise girişi boş bırakılamaz!",
-                        "Yanlış ise girişi boş bırakılamaz!"
-                    ]
+                    errorMessageList: ["Koşul girişi boş bırakılamaz!"]
                 });
             }
         }
 
         this.setState({
-            control: "",
-            isTrue: "",
-            isFalse: ""
-        });
-    }
-    handleIsFalseChange(e){
-        this.setState({
-            isFalse: e.target.value
-        });
-    }
-    handleIsTrueChange(e){
-        this.setState({
-            isTrue: e.target.value
+            control: ""
         });
     }
     handleControlChange(e){
@@ -78,18 +80,6 @@ class ControlFlow extends React.Component {
                     value={this.state.control} 
                     onChange={this.handleControlChange}
                     placeholder="Koşul ifadesi giriniz..."
-                />
-                <label>DOĞRU İSE</label>
-                <input type="text" 
-                    value={this.state.isTrue} 
-                    onChange={this.handleIsTrueChange}
-                    placeholder="Doğru koşul için ifade giriniz..."
-                />
-                <label>YANLIŞ İSE</label>
-                <input type="text" 
-                    value={this.state.isFalse} 
-                    onChange={this.handleIsFalseChange}
-                    placeholder="Yanlış koşul için ifade giriniz..."
                 />
                 <ValueBtn onClick={this.handleBtnClick}/>
             </div>

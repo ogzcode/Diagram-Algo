@@ -1,12 +1,12 @@
 import React from "react";
 import "./Canvas.css";
-import { Layer, Stage, Rect, Circle, Line } from "react-konva";
+import { Layer, Stage, Rect, Circle } from "react-konva";
 
 const SHAPE_MARGIN = 20;
 const RECT_SIZE = 50
 const CIRCLE_SIZE = 25
 
-function getShape(type, originX, originY, func = null) {
+function getShape(type, originX, originY, border, func = null) {
     if (type === "variable") {
         return <Rect
             x={originX}
@@ -27,12 +27,27 @@ function getShape(type, originX, originY, func = null) {
         />;
     }
     else if (type === "operation") {
+        let color;
+        let width;
+        console.log(border);
+        if (border === "state"){
+            color = "#13b913";
+            width = 4;
+            console.log("hello");
+        }
+        else if (border === "loop"){
+            color = "#5555df";
+            width = 4;
+        }
+        console.log(color, width);
         return <Rect
             x={originX - RECT_SIZE / 2}
             y={originY}
             width={RECT_SIZE * 2}
             height={RECT_SIZE}
             fill="#f7e600"
+            stroke={color}
+            strokeWidth={width}
             key={originY}
         />;
     }
@@ -44,6 +59,7 @@ function getShape(type, originX, originY, func = null) {
             height={RECT_SIZE}
             fill="#13b913"
             rotation={45}
+            onClick={func}
             key={originY}
         />;
     }
@@ -68,8 +84,10 @@ function getLength(list) {
         if (i.type === "loop") {
             len += i.statements.length;
         }
+        else if (i.type === "statement"){
+            len += i.statements.length;
+        }
     }
-
     return len;
 }
 
@@ -82,14 +100,18 @@ class Canvas extends React.Component {
             height: 0,
             originX: 450,
             originY: 20,
-            shapeList: [],
-            lineList: []
+            shapeList: []
         };
         this.handleLoopClick = this.handleLoopClick.bind(this);
+        this.handleCondClick = this.handleCondClick.bind(this);
     }
 
     handleLoopClick() {
         this.props.onLoopClick(!this.props.loopState);
+    }
+
+    handleCondClick() {
+        this.props.onCondClick(!this.props.condState);
     }
 
     componentDidMount() {
@@ -105,7 +127,15 @@ class Canvas extends React.Component {
         let lastIndex = data.length - 1;
         if (dataLen > shapeLen) {
             if (data[lastIndex].type === "loop" && data[lastIndex].statements.length > 0) {
-                const d = this.drawShapes(data[lastIndex].statements[data[lastIndex].statements.length - 1]);
+                const d = this.drawShapes(data[lastIndex].statements[data[lastIndex].statements.length - 1], "loop");
+                this.setState({
+                    shapeList: d.shapeList,
+                    originX: d.originX,
+                    originY: d.originY
+                });
+            }
+            else if (data[lastIndex].type === "statement" && data[lastIndex].statements.length > 0) {
+                const d = this.drawShapes(data[lastIndex].statements[data[lastIndex].statements.length - 1], "state");
                 this.setState({
                     shapeList: d.shapeList,
                     originX: d.originX,
@@ -113,7 +143,7 @@ class Canvas extends React.Component {
                 });
             }
             else {
-                const d = this.drawShapes(data[data.length - 1]);
+                const d = this.drawShapes(data[data.length - 1], null);
                 this.setState({
                     shapeList: d.shapeList,
                     originX: d.originX,
@@ -129,18 +159,22 @@ class Canvas extends React.Component {
             });
         }
     }
-    drawShapes(data) {
+    drawShapes(data, border) {
         const shapeList = this.state.shapeList.slice();
-        const lineList = this.state.lineList.slice();
         let originX = this.state.originX;
         let originY = this.state.originY;
 
         if (data.type === "loop") {
-            shapeList.push(getShape(data.type, originX, originY, this.handleLoopClick));
+            shapeList.push(getShape(data.type, originX, originY, null, this.handleLoopClick));
+        }
+        else if (data.type === "statement"){
+            shapeList.push(getShape(data.type, originX, originY, null, this.handleCondClick));
         }
         else {
-            shapeList.push(getShape(data.type, originX, originY));
+            console.log(border);
+            shapeList.push(getShape(data.type, originX, originY, border));
         }
+
         originY += RECT_SIZE + SHAPE_MARGIN;
 
         if (data.type === "statement") {
