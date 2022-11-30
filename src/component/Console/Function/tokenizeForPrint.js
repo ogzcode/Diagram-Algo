@@ -10,7 +10,7 @@ function tokenizeForPrint(stringList, variableList){
             }
             else {
                 result = result.splice();
-                result.push(`Error ${string.slice(1)} is not define`);
+                result.push(`Hata! > "${string.slice(1)}" isimli değişken bulunamadı!!`);
                 break;
             }
         }

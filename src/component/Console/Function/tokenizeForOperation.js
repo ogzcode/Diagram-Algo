@@ -90,7 +90,7 @@ function tokenizeForOperation(operation, variableList){
     let result = isVariable(operation.result, variableList);
 
     if (!calc){
-        return false;
+        return `Hata! > "${operation.prosses}" işlemi derlenemedi!!`;
     }
 
     if (result) {
@@ -98,7 +98,7 @@ function tokenizeForOperation(operation, variableList){
         variableList[index].value = calc;
     }
     else {
-        return false;
+        return `Hata! > ${operation.result} isimli değişken bulunamadı!!`;
     }
 }
 

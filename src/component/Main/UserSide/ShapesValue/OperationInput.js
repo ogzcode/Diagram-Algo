@@ -66,14 +66,14 @@ class OperationInput extends React.Component {
                         className="equal__var" 
                         value={this.state.result} 
                         onChange={this.handleResult}
-                        placeholder="Değişken ismi giriniz"
+                        placeholder="Değişken ismi giriniz..."
                     />
                     <label>İŞLEM</label>
                     <input type="text" 
                         value={this.state.operation} 
                         onChange={this.handleOperation}
                         className="operation"  
-                        placeholder="Aritmetik bir işlem giriniz"  
+                        placeholder="Aritmetik bir işlem giriniz..."  
                     />
                 </div>
                 <ValueBtn onClick={this.handleBtnClick}/>

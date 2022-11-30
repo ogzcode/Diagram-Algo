@@ -52,7 +52,7 @@ class PrintInput extends React.Component {
                 <input type="text" 
                     value={this.state.value} 
                     onChange={this.handleInputChange}
-                    placeholder="Dize veya değişken ismi giriniz($n)"
+                    placeholder="Dize veya değişken ismi giriniz($n)..."
                 />
                 <ValueBtn onClick={this.handleBtnClick}/>
             </div>

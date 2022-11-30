@@ -50,7 +50,7 @@ class VariableInput extends React.Component {
             this.setState({
                 value: "",
                 errorState: true,
-                errorMessageList: ["Değişken değeri sayılardan oluşmalıdır!"]
+                errorMessageList: ["Değişken değeri pozitif sayılardan oluşmalıdır!"]
             });
         }
         else {
@@ -74,7 +74,7 @@ class VariableInput extends React.Component {
                 <div className="box">
                     <label>DEĞİŞKEN İSMİ</label>
                     <input type="text"
-                        placeholder="Değişkenin ismini giriniz"
+                        placeholder="Değişkenin ismini giriniz..."
                         onChange={this.handleNameChange}
                         value={this.state.name}
                     />
@@ -82,7 +82,7 @@ class VariableInput extends React.Component {
                 <div className="box">
                     <label>DEĞİŞKEN DEĞERİ</label>
                     <input type="text"
-                        placeholder="Sayı giriniz"
+                        placeholder="Pozitif sayı giriniz..."
                         onChange={this.handleValueChange}
                         value={this.state.value}
                     />

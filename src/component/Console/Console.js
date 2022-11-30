@@ -45,8 +45,8 @@ class Console extends React.Component {
             else if (d.type === "operation") {
                 let res = tokenizeForOperation(d, variableList);
 
-                if (res === false) {
-                    printTextList.push("Operation not compiled");
+                if (res) {
+                    printTextList.push(res);
                 }
             }
             else if (d.type === "statement") {
@@ -80,7 +80,7 @@ class Console extends React.Component {
                 <div className="text__field">
                     {
                         this.state.printTextList.map((text, index) => (
-                            <p key={index}>{index}:    {text}</p>
+                            <p key={index}>#    {text}</p>
                         ))
                     }
                 </div>

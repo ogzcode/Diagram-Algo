@@ -1,10 +1,10 @@
 import React from "react";
 import "./Canvas.css";
-import { Layer, Stage, Rect, Circle } from "react-konva";
+import { Layer, Stage, Rect, Circle, Line } from "react-konva";
 
 const SHAPE_MARGIN = 20;
-const RECT_SIZE = 40
-const CIRCLE_SIZE = 20
+const RECT_SIZE = 50
+const CIRCLE_SIZE = 25
 
 function getShape(type, originX, originY, func = null) {
     if (type === "variable") {
@@ -82,7 +82,8 @@ class Canvas extends React.Component {
             height: 0,
             originX: 450,
             originY: 20,
-            shapeList: []
+            shapeList: [],
+            lineList: []
         };
         this.handleLoopClick = this.handleLoopClick.bind(this);
     }
@@ -130,6 +131,7 @@ class Canvas extends React.Component {
     }
     drawShapes(data) {
         const shapeList = this.state.shapeList.slice();
+        const lineList = this.state.lineList.slice();
         let originX = this.state.originX;
         let originY = this.state.originY;
 
@@ -154,7 +156,7 @@ class Canvas extends React.Component {
     render() {
         return (
             <div ref={this.root} className="canvas">
-                <Stage width={this.state.width} height={this.state.height}>
+                <Stage width={this.state.width} height={2000}>
                     <Layer>
                         {this.state.shapeList}
                     </Layer>
