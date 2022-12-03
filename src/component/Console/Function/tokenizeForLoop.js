@@ -5,7 +5,7 @@ function tokenizeForLoop(d, variableList){
         for (let j of d.statements){
             if (j.type === "operation"){
                 let res = tokenizeForOperation(j, variableList);
-                if (res === false){
+                if (res){
                     return res;
                 }
             }

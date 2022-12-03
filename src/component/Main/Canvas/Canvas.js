@@ -189,6 +189,7 @@ class Canvas extends React.Component {
                     points={[originX + RECT_SIZE / 2, originY - SHAPE_MARGIN, originX + RECT_SIZE / 2, originY]}
                     stroke="black"
                     strokeWidth={4}
+                    key={lineList.length}
                 />
             );
         }
@@ -234,12 +235,12 @@ class Canvas extends React.Component {
                 <Stage width={this.state.width} height={2000}>
                     <Layer>
                         {this.state.shapeList}
+                    </Layer>
+                    <Layer>
                         {this.state.lineList}
                     </Layer>
                     <Layer>
-                        {
-                            this.isActive()
-                        }
+                        {this.isActive()}
                     </Layer>
                 </Stage>
             </div>

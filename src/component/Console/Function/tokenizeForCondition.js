@@ -1,69 +1,92 @@
 import isVariable from "./isVariable";
-import tokenizeForPrint from "./tokenizeForPrint";
+import tokenizeForOperation from "./tokenizeForOperation";
 
-function tokenizeExpression(value) {
-    const operation = {
-        "valueOne": "",
-        "operator": "",
-        "valueTwo": ""
+function tokenizeCond(condArray, variableList) {
+    const data = {
+        "firstVar": null,
+        "secondVar": null,
+        "operator": ""
     };
-
-    let charList = [];
-
-    for (let char of value) {
-        if ("><=!".includes(char)) {
-            if (operation.valueOne === "") {
-                operation.valueOne = charList.join("");
-                charList = charList.splice();
-                operation.operator = char;
+    for (let i of condArray) {
+        let v = isVariable(i, variableList);
+        if (v) {
+            if (data.firstVar == null) {
+                data.firstVar = v.value;
+            }
+            else if (data.secondVar == null) {
+                data.secondVar = v.value;
             }
             else {
                 return false;
             }
         }
+        else if ("><=!".includes(i)) {
+            if (data.operator === "") {
+                data.operator = i;
+            }
+        }
         else {
-            charList.push(char);
+            let v = parseInt(i);
+
+            if (Number.isInteger(v) && !isNaN(v)) {
+                if (data.firstVar === "") {
+                    data.firstVar = i;
+                }
+                else if (data.secondVar === "") {
+                    data.secondVar = i;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
         }
     }
-    operation.valueTwo = charList.join("");
-    return operation;
+
+    return data;
 }
 
-function tokenizeForCondition(data, variableList) {
-    const op = tokenizeExpression(data.control);
+function calcCondition(condList, variableList) {
+    for (let i of condList) {
+        if (i.type === "operation") {
+            let res = tokenizeForOperation(i, variableList);
 
-    let var1 = isVariable(op.valueOne, variableList);
-    let var2 = isVariable(op.valueTwo, variableList);
-    let res = null;
-
-    if (var1 && var2) {
-        if (op.operator === ">") {
-            res = var1.value > var2.value;
-        }
-        else if (op.operator === "<") {
-            res = var1.value < var2.value;
-        }
-        else if (op.operator === "=") {
-            res = var1.value === var2.value;
-        }
-        else if (op.operator === "!") {
-            res = var1.value !== var2.value;
+            if (res) {
+                return res;
+            }
         }
     }
-    else {
-        return false;
+}
+
+function tokenizeForCondition(operation, variableList) {
+    let result = tokenizeCond(operation.control.split(" "), variableList);
+
+    if (!result) {
+        return `Hata! > "${operation.control}" işlemi derlenemedi!!`;
     }
 
-    let text = null;
+    const calc = (statementList, variableList) => {
+        let res = calcCondition(operation.statements, variableList);
 
-    if (res) {
-        text = tokenizeForPrint(data.isTrue.split(" "), variableList);
-    }
-    else {
-        text = tokenizeForPrint(data.isFalse.split(" "), variableList);
-    }
+        if (res) {
+            return res;
+        }
+    };
 
-    return text;
+    if (result.operator === ">" && result.firstVar > result.secondVar) {
+        calc(operation.statements, variableList);
+    }
+    else if (result.operator === "<" && result.firstVar < result.secondVar) {
+        calc(operation.statements, variableList);
+    }
+    else if (result.operator === "=" && result.firstVar === result.secondVar) {
+        calc(operation.statements, variableList);
+    }
+    else if (result.operator === "!" && result.firstVar !== result.secondVar) {
+        calc(operation.statements, variableList);
+    }
 }
 
 export default tokenizeForCondition;

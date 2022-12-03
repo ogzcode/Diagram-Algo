@@ -8,7 +8,7 @@ class VariableInput extends React.Component {
         super(props);
         this.state = {
             name: "",
-            value: "",
+            value: 0,
             errorState: false,
             errorMessageList: []
         };
@@ -19,7 +19,7 @@ class VariableInput extends React.Component {
     }
     handleBtnClick(value) {
         if (value) {
-            if (this.state.value && this.state.name) {
+            if ((this.state.value && this.state.name) || this.state.value === 0) {
                 this.props.onClick({
                     name: this.state.name,
                     value: this.state.value
@@ -33,7 +33,7 @@ class VariableInput extends React.Component {
             }
         }
         this.setState({
-            value: "",
+            value: 0,
             name: ""
         });
     }
@@ -46,9 +46,17 @@ class VariableInput extends React.Component {
     handleValueChange(e) {
         let value = parseInt(e.target.value);
 
+        if (value === 0){
+            this.setState({
+                value: value
+            });
+            console.log("in");
+            return;
+        }
+        console.log("out");
         if (!Number.isInteger(value) || isNaN(value)) {
             this.setState({
-                value: "",
+                value: 0,
                 errorState: true,
                 errorMessageList: ["Değişken değeri pozitif sayılardan oluşmalıdır!"]
             });
