@@ -1,12 +1,12 @@
 import React from "react";
 import "./Canvas.css";
-import { Layer, Stage, Rect, Circle } from "react-konva";
+import { Layer, Stage, Rect, Circle, Line } from "react-konva";
 
 const SHAPE_MARGIN = 20;
 const RECT_SIZE = 50
 const CIRCLE_SIZE = 25
 
-function getShape(type, originX, originY, border, func = null) {
+function getShape(type, originX, originY, border, func = null, activeState = null) {
     if (type === "variable") {
         return <Rect
             x={originX}
@@ -29,17 +29,14 @@ function getShape(type, originX, originY, border, func = null) {
     else if (type === "operation") {
         let color;
         let width;
-        console.log(border);
-        if (border === "state"){
+        if (border === "state") {
             color = "#13b913";
             width = 4;
-            console.log("hello");
         }
-        else if (border === "loop"){
+        else if (border === "loop") {
             color = "#5555df";
             width = 4;
         }
-        console.log(color, width);
         return <Rect
             x={originX - RECT_SIZE / 2}
             y={originY}
@@ -53,12 +50,14 @@ function getShape(type, originX, originY, border, func = null) {
     }
     else if (type === "statement") {
         return <Rect
-            x={originX + (RECT_SIZE / 2) / Math.pow(2, 1 / 2) + 5}
-            y={originY}
+            x={originX + (RECT_SIZE / 2) / Math.pow(2, 1 / 2) + 8}
+            y={originY - 2}
             width={RECT_SIZE}
             height={RECT_SIZE}
             fill="#13b913"
             rotation={45}
+            stroke={activeState === "cond" ? "black" : ""}
+            strokeWidth={activeState === "cond" ? 2 : 0}
             onClick={func}
             key={originY}
         />;
@@ -71,6 +70,8 @@ function getShape(type, originX, originY, border, func = null) {
             height={RECT_SIZE}
             fill="#5555df"
             cornerRadius={[RECT_SIZE, RECT_SIZE, RECT_SIZE, RECT_SIZE]}
+            stroke={activeState === "loop" ? "black" : ""}
+            strokeWidth={activeState === "loop" ? 2 : 0}
             onClick={func}
             key={originY}
         />;
@@ -84,7 +85,7 @@ function getLength(list) {
         if (i.type === "loop") {
             len += i.statements.length;
         }
-        else if (i.type === "statement"){
+        else if (i.type === "statement") {
             len += i.statements.length;
         }
     }
@@ -100,7 +101,8 @@ class Canvas extends React.Component {
             height: 0,
             originX: 450,
             originY: 20,
-            shapeList: []
+            shapeList: [],
+            lineList: []
         };
         this.handleLoopClick = this.handleLoopClick.bind(this);
         this.handleCondClick = this.handleCondClick.bind(this);
@@ -127,17 +129,21 @@ class Canvas extends React.Component {
         let lastIndex = data.length - 1;
         if (dataLen > shapeLen) {
             if (data[lastIndex].type === "loop" && data[lastIndex].statements.length > 0) {
-                const d = this.drawShapes(data[lastIndex].statements[data[lastIndex].statements.length - 1], "loop");
+                let elem = data[lastIndex].statements[data[lastIndex].statements.length - 1];
+                const d = this.drawShapes(elem, "loop");
                 this.setState({
                     shapeList: d.shapeList,
+                    lineList: d.lineList,
                     originX: d.originX,
                     originY: d.originY
                 });
             }
             else if (data[lastIndex].type === "statement" && data[lastIndex].statements.length > 0) {
-                const d = this.drawShapes(data[lastIndex].statements[data[lastIndex].statements.length - 1], "state");
+                let elem = data[lastIndex].statements[data[lastIndex].statements.length - 1];
+                const d = this.drawShapes(elem, "state");
                 this.setState({
                     shapeList: d.shapeList,
+                    lineList: d.lineList,
                     originX: d.originX,
                     originY: d.originY
                 });
@@ -146,6 +152,7 @@ class Canvas extends React.Component {
                 const d = this.drawShapes(data[data.length - 1], null);
                 this.setState({
                     shapeList: d.shapeList,
+                    lineList: d.lineList,
                     originX: d.originX,
                     originY: d.originY
                 });
@@ -154,6 +161,7 @@ class Canvas extends React.Component {
         else if (dataLen < getLength(prevProps.data)) {
             this.setState({
                 shapeList: [],
+                lineList: [],
                 originX: 450,
                 originY: 20
             });
@@ -161,18 +169,28 @@ class Canvas extends React.Component {
     }
     drawShapes(data, border) {
         const shapeList = this.state.shapeList.slice();
+        const lineList = this.state.lineList.slice();
         let originX = this.state.originX;
         let originY = this.state.originY;
 
         if (data.type === "loop") {
             shapeList.push(getShape(data.type, originX, originY, null, this.handleLoopClick));
         }
-        else if (data.type === "statement"){
+        else if (data.type === "statement") {
             shapeList.push(getShape(data.type, originX, originY, null, this.handleCondClick));
         }
         else {
-            console.log(border);
             shapeList.push(getShape(data.type, originX, originY, border));
+        }
+
+        if (shapeList.length > 1) {
+            lineList.push(
+                <Line
+                    points={[originX + RECT_SIZE / 2, originY - SHAPE_MARGIN, originX + RECT_SIZE / 2, originY]}
+                    stroke="black"
+                    strokeWidth={4}
+                />
+            );
         }
 
         originY += RECT_SIZE + SHAPE_MARGIN;
@@ -183,9 +201,32 @@ class Canvas extends React.Component {
 
         return {
             shapeList: shapeList,
+            lineList: lineList,
             originX: originX,
             originY: originY
         };
+    }
+    isActive() {
+        if (this.props.loopState) {
+            return (
+                <Circle
+                    x={20}
+                    y={20}
+                    radius={10}
+                    fill="#5555df"
+                />
+            );
+        }
+        else if (this.props.condState){
+            return (
+                <Circle
+                    x={20}
+                    y={20}
+                    radius={10}
+                    fill="#13b913"
+                />
+            );
+        }
     }
     render() {
         return (
@@ -193,6 +234,12 @@ class Canvas extends React.Component {
                 <Stage width={this.state.width} height={2000}>
                     <Layer>
                         {this.state.shapeList}
+                        {this.state.lineList}
+                    </Layer>
+                    <Layer>
+                        {
+                            this.isActive()
+                        }
                     </Layer>
                 </Stage>
             </div>

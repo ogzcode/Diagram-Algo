@@ -4,6 +4,7 @@ import tokenizeForPrint from "./Function/tokenizeForPrint";
 import tokenizeForOperation from "./Function/tokenizeForOperation";
 import tokenizeForCondition from "./Function/tokenizeForCondition";
 import tokenizeForLoop from "./Function/tokenizeForLoop";
+import isVariable from "./Function/isVariable";
 
 class Console extends React.Component {
     constructor(props) {
@@ -36,7 +37,14 @@ class Console extends React.Component {
         const printTextList = this.state.printTextList.slice();
         for (let d of this.props.data) {
             if (d.type === "variable") {
-                variableList.push({ "name": d.name, "value": d.value });
+                let v = isVariable(d.name, variableList);
+                if (v){
+                    let i = variableList.indexOf(v);
+                    variableList[i].value = d.value;
+                }
+                else {
+                    variableList.push({ "name": d.name, "value": d.value });
+                }
             }
             else if (d.type === "print") {
                 let res = tokenizeForPrint(d.value.split(" "), variableList);
@@ -76,7 +84,10 @@ class Console extends React.Component {
     render() {
         return (
             <div className="console">
-                <button className="close__btn" onClick={this.handleCloseBtn}>Close</button>
+                <div className="console__top">
+                    <p>Konsol Ekranı</p>
+                    <button className="close__btn" onClick={this.handleCloseBtn}>X</button>
+                </div>
                 <div className="text__field">
                     {
                         this.state.printTextList.map((text, index) => (
