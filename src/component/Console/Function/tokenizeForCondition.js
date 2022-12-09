@@ -27,13 +27,12 @@ function tokenizeCond(condArray, variableList) {
         }
         else {
             let v = parseInt(i);
-
             if (Number.isInteger(v) && !isNaN(v)) {
-                if (data.firstVar === "") {
-                    data.firstVar = i;
+                if (data.firstVar === null) {
+                    data.firstVar = v;
                 }
-                else if (data.secondVar === "") {
-                    data.secondVar = i;
+                else if (data.secondVar === null) {
+                    data.secondVar = v;
                 }
                 else {
                     return false;
@@ -62,7 +61,7 @@ function calcCondition(condList, variableList) {
 
 function tokenizeForCondition(operation, variableList) {
     let result = tokenizeCond(operation.control.split(" "), variableList);
-
+    console.log(result);
     if (!result) {
         return `Hata! > "${operation.control}" işlemi derlenemedi!!`;
     }

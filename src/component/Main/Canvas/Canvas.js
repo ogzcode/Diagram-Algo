@@ -1,6 +1,6 @@
 import React from "react";
 import "./Canvas.css";
-import { Layer, Stage, Rect, Circle, Line } from "react-konva";
+import { Layer, Stage, Rect, Circle, Line, Text } from "react-konva";
 
 const SHAPE_MARGIN = 20;
 const RECT_SIZE = 50
@@ -78,6 +78,63 @@ function getShape(type, originX, originY, border, func = null, activeState = nul
     }
 }
 
+function getText(data, originX, originY) {
+    const text = {
+        "print": <Text
+            x={originX + CIRCLE_SIZE / 2}
+            y={originY + CIRCLE_SIZE - CIRCLE_SIZE / 4}
+            width={CIRCLE_SIZE}
+            height={CIRCLE_SIZE}
+            text={data.value}
+            fill="black"
+            fontSize={14}
+            align="center"
+        />,
+        "variable": <Text
+            x={originX}
+            y={originY + RECT_SIZE / 3}
+            width={RECT_SIZE}
+            height={RECT_SIZE}
+            text={`${data.name}=${data.value}`}
+            fill="black"
+            fontSize={14}
+            align="center"
+        />,
+        "operation": <Text
+            x={originX - RECT_SIZE / 2}
+            y={originY + RECT_SIZE / 3}
+            width={RECT_SIZE * 2}
+            height={RECT_SIZE}
+            text={`${data.result}=${data.prosses}`}
+            fill="black"
+            fontSize={14}
+            align="center"
+        />,
+        "loop": <Text
+            x={originX}
+            y={originY + RECT_SIZE / 3}
+            width={RECT_SIZE}
+            height={RECT_SIZE}
+            text={`i=${data.value}`}
+            fill="white"
+            fontSize={14}
+            align="black"
+        />,
+        "statement": <Text
+            x={originX}
+            y={originY + RECT_SIZE / 2}
+            width={RECT_SIZE}
+            height={RECT_SIZE / 2}
+            text={`${data.control}`}
+            fill="black"
+            fontSize={14}
+            align="center"
+        />
+    };
+    
+    return text[data.type];
+}
+
 function getLength(list) {
     let len = list.length;
 
@@ -102,7 +159,8 @@ class Canvas extends React.Component {
             originX: 450,
             originY: 20,
             shapeList: [],
-            lineList: []
+            lineList: [],
+            textList: []
         };
         this.handleLoopClick = this.handleLoopClick.bind(this);
         this.handleCondClick = this.handleCondClick.bind(this);
@@ -134,6 +192,7 @@ class Canvas extends React.Component {
                 this.setState({
                     shapeList: d.shapeList,
                     lineList: d.lineList,
+                    textList: d.textList,
                     originX: d.originX,
                     originY: d.originY
                 });
@@ -144,6 +203,7 @@ class Canvas extends React.Component {
                 this.setState({
                     shapeList: d.shapeList,
                     lineList: d.lineList,
+                    textList: d.textList,
                     originX: d.originX,
                     originY: d.originY
                 });
@@ -153,6 +213,7 @@ class Canvas extends React.Component {
                 this.setState({
                     shapeList: d.shapeList,
                     lineList: d.lineList,
+                    textList: d.textList,
                     originX: d.originX,
                     originY: d.originY
                 });
@@ -162,6 +223,7 @@ class Canvas extends React.Component {
             this.setState({
                 shapeList: [],
                 lineList: [],
+                textList: [],
                 originX: 450,
                 originY: 20
             });
@@ -170,6 +232,7 @@ class Canvas extends React.Component {
     drawShapes(data, border) {
         const shapeList = this.state.shapeList.slice();
         const lineList = this.state.lineList.slice();
+        const textList = this.state.textList.slice();
         let originX = this.state.originX;
         let originY = this.state.originY;
 
@@ -188,11 +251,13 @@ class Canvas extends React.Component {
                 <Line
                     points={[originX + RECT_SIZE / 2, originY - SHAPE_MARGIN, originX + RECT_SIZE / 2, originY]}
                     stroke="black"
-                    strokeWidth={4}
+                    strokeWidth={3}
                     key={lineList.length}
                 />
             );
         }
+
+        textList.push(getText(data, originX, originY));
 
         originY += RECT_SIZE + SHAPE_MARGIN;
 
@@ -203,6 +268,7 @@ class Canvas extends React.Component {
         return {
             shapeList: shapeList,
             lineList: lineList,
+            textList: textList,
             originX: originX,
             originY: originY
         };
@@ -218,7 +284,7 @@ class Canvas extends React.Component {
                 />
             );
         }
-        else if (this.props.condState){
+        else if (this.props.condState) {
             return (
                 <Circle
                     x={20}
@@ -234,10 +300,13 @@ class Canvas extends React.Component {
             <div ref={this.root} className="canvas">
                 <Stage width={this.state.width} height={2000}>
                     <Layer>
+                        {this.state.lineList}
+                    </Layer>
+                    <Layer>
                         {this.state.shapeList}
                     </Layer>
                     <Layer>
-                        {this.state.lineList}
+                        {this.state.textList}
                     </Layer>
                     <Layer>
                         {this.isActive()}

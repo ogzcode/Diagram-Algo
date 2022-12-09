@@ -15,24 +15,15 @@ class ShapesValue extends React.Component {
         this.props.onClick(data);
     }
     getValue(){
-        if (this.props.type === "variable"){
-            return <VariableInput onClick={this.getData}/>
-        }
-        else if(this.props.type === "operation"){
-            return <OperationInput onClick={this.getData}/>
-        }
-        else if (this.props.type === "statement"){
-            return <ControlFlow onClick={this.getData}/>
-        }
-        else if (this.props.type === "loop"){
-            return <LoopInput onClick={this.getData}/>
-        }
-        else if (this.props.type === "print"){
-            return <PrintInput onClick={this.getData}/>
-        }
-        else {
-            return null;
-        }
+        const data = {
+            "variable": <VariableInput onClick={this.getData}/>,
+            "operation": <OperationInput onClick={this.getData}/>,
+            "statement": <ControlFlow onClick={this.getData}/>,
+            "loop": <LoopInput onClick={this.getData}/>,
+            "print": <PrintInput onClick={this.getData}/>
+        };
+        
+        return data[this.props.type];
     }
     render() {
         let comp = this.getValue();

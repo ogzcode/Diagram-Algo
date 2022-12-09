@@ -102,33 +102,6 @@ class App extends React.Component {
 }
 
 /* 
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <script src="https://unpkg.com/konva@8.3.14/konva.min.js"></script>
-    <meta charset="utf-8" />
-    <title>Konva Text Demo</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #f0f0f0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="container"></div>
-    <script>
-      var stage = new Konva.Stage({
-        container: 'container',
-        width: 340,
-        height: 300,
-      });
-
-      var layer = new Konva.Layer();
-
       var simpleText = new Konva.Text({
         x: stage.width() / 2,
         y: 15,
@@ -171,16 +144,6 @@ class App extends React.Component {
         shadowOpacity: 0.2,
         cornerRadius: 10,
       });
-
-      // add the shapes to the layer
-      layer.add(simpleText);
-      layer.add(rect);
-      layer.add(complexText);
-
-      // add the layer to the stage
-      stage.add(layer);
-    </script>
-  </body>
-</html>*/
+*/
 
 export default App;

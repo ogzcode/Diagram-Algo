@@ -50,10 +50,8 @@ class VariableInput extends React.Component {
             this.setState({
                 value: value
             });
-            console.log("in");
             return;
         }
-        console.log("out");
         if (!Number.isInteger(value) || isNaN(value)) {
             this.setState({
                 value: 0,
