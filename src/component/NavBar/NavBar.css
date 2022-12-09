@@ -16,7 +16,6 @@
 
 .nav__btn {
     padding: .5rem 1.5rem;
-    background-color: #0daf50;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -36,4 +35,9 @@
 .delete--btn {
     background-color: #ec0e33;
     margin-left: 1rem;
+}
+
+.doc--btn {
+    margin-left: 1rem;
+    background-color: rgb(15, 112, 238);
 }
