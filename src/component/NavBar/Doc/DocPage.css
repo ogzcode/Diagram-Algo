@@ -9,8 +9,8 @@
 }
 
 .doc__inner {
-    width: 640px;
-    height: 360px;
+    width: 920px;
+    height: 420px;
     background-color: white;
     position: absolute;
     top: 50%;
@@ -39,6 +39,7 @@
 
 .doc__side {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .doc__container button {
@@ -47,7 +48,7 @@
     right: 0;
     width: 32px;
     height: 32px;
-    background-color: red;
+    background-color: rgb(228, 15, 15);
     border: none;
     color: white;
     font-weight: 600;

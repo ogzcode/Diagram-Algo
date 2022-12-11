@@ -1,5 +1,10 @@
 import React from "react";
+import FirstPanel from "./Content/FirstPanel";
+import Fundamental from "./Content/Fundamental";
+import Variable from "./Content/Variable";
 import "./DocPage.css";
+import "./Content/Content.css";
+import Expression from "./Content/Expression";
 
 class DocPage extends React.Component {
     constructor(props) {
@@ -14,21 +19,36 @@ class DocPage extends React.Component {
         this.props.onClick(false);
     }
     onChangeContent(value){
-        console.log();
+        this.setState({content: value});
     }
     render() {
+        let content = null;
+
+        if (this.state.content === "Fundamental"){
+            content = <Fundamental/>
+        }
+        else if (this.state.content === "Variable"){
+            content = <Variable/>
+        }
+        else if (this.state.content === "Expression") {
+            content = <Expression/>
+        }
+        else {
+            content = <FirstPanel/>
+        }
         return (
             <div className="doc__container">
                 <div className="doc__inner">
                     <div className="doc__select__side">
-                        <p>Değişken</p>
-                        <p>İşlem</p>
+                        <p onClick={() => this.onChangeContent("Fundamental")}>Başlangıç</p>
+                        <p onClick={() => this.onChangeContent("Variable")}>Değişken</p>
+                        <p onClick={() => this.onChangeContent("Expression")}>İşlem</p>
+                        <p>Koşul</p>
+                        <p>Döngü</p>
                         <p>Yazdır</p>
-                        <p>Değişken</p>
-                        <p>Şart</p>
                     </div>
                     <div className="doc__side">
-                        <p>Hello World</p>
+                        { content }
                     </div>
                     <button className="doc__close__btn" onClick={this.handleOnClose}>X</button>
                 </div>
