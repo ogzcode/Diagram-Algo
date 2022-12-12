@@ -1,3 +1,6 @@
+import print from "./img/print.png";
+import printInput from "./img/print_input.png";
+
 function Print() {
     return (
         <div className="content">
@@ -8,8 +11,8 @@ function Print() {
             <p className="content__text">
                 Aynı zamanda değişken değerlerini yazmak için de kullanılır.
             </p>
-            <div className="img var--img--2">
-                <img src="" alt="print resmi"/>
+            <div className="img var--img">
+                <img src={print} alt="print resmi"/>
             </div>
             <h3 className="content__head">Kullanım Şekli</h3>
             <p className="content__text">
@@ -20,7 +23,7 @@ function Print() {
                 yazabilirsiniz.
             </p>
             <div className="img var--img--2">
-                <img src="" alt="print girdi"/>
+                <img src={printInput} alt="print girdi"/>
             </div>
             <br></br>
             <p className="content__text">Örnek Kullanım</p>

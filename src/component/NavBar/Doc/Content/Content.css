@@ -57,6 +57,11 @@ img {
     width: 50%;
 }
 
+.var--img--3 img {
+    width: 100%;
+    height: 100%;
+}
+
 .navbar--img img { 
     width: 100%;
 }

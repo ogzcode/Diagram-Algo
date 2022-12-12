@@ -1,3 +1,9 @@
+import condition from "./img/condition.png";
+import conditionInput from "./img/condition_input.png";
+import conditionActive from "./img/condition_active.png";
+import conditionBorder from "./img/condition_border.png";
+import conditionExample from "./img/condition_example.png";
+
 function Condition() {
     return (
         <div className="content">
@@ -15,8 +21,8 @@ function Condition() {
                 <li><i>=</i> İki değişkenin veya sayının eşitliklerini karşılaştırır.</li>
                 <li><i>!</i> İki değişkenin veya sayının eşitsizliklerini karşılaştırır.</li>
             </ul>
-            <div className="img var--img--2">
-                <img src="" alt="koşul şekli"/>
+            <div className="img var--img">
+                <img src={condition} alt="koşul şekli"/>
             </div>
             <h3 className="content__head">Kullanım Şekli</h3>
             <p className="content__text">
@@ -24,7 +30,7 @@ function Condition() {
             </p>
             <p className="content__text"></p>
             <div className="img var--img--2">
-                <img src="" alt="koşul girdi"/>
+                <img src={conditionInput} alt="koşul girdi"/>
             </div>
             <p className="content__text">
                 Ardından koşul içerisinde işlem yapabilmek için <i>Çizim Ekranında </i>
@@ -38,14 +44,14 @@ function Condition() {
                 -Eğer aşağıdaki şekilde olduğu gibiyse koşul içerisinde aritmekik işlem 
                 tanımlayabilirsiniz.
             </p>
-            <div className="img var--img--2">
-                <img src="" alt="çizim ekranı aktif koşul"/>
+            <div className="img var--img--3">
+                <img src={conditionActive} alt="çizim ekranı aktif koşul"/>
             </div>
             <p className="content__text">
                 -Koşul içerisinde tanımladığınız işlemler yeşil bir kenarlıkla belirtilmiştir.
             </p>
-            <div className="img var--img--2">
-                <img src="" alt="kenarlı girdi"/>
+            <div className="img var--img--3">
+                <img src={conditionBorder} alt="kenarlı girdi"/>
             </div>
             <p className="content__text">
                 -Şarttan çıkmak için yeniden şekle tıklayabilirsiniz.
@@ -56,8 +62,8 @@ function Condition() {
                 0 eşit ise değişkenin değerine 10 eklenmesi ve daha sonra da ekrana değerinin 
                 yazılması kodlanmıştır.
             </p>
-            <div className="img var--img--2">
-                <img src="" alt="şart örnek"/>
+            <div className="img var--img--3">
+                <img src={conditionExample} alt="şart örnek"/>
             </div>
         </div>
     );
