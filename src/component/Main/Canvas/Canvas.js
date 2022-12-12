@@ -86,7 +86,7 @@ function getText(data, originX, originY) {
             width={CIRCLE_SIZE}
             height={CIRCLE_SIZE}
             text={data.value}
-            fill="black"
+            fill="white"
             fontSize={14}
             align="center"
         />,
@@ -96,7 +96,7 @@ function getText(data, originX, originY) {
             width={RECT_SIZE}
             height={RECT_SIZE}
             text={`${data.name}=${data.value}`}
-            fill="black"
+            fill="white"
             fontSize={14}
             align="center"
         />,
@@ -106,27 +106,26 @@ function getText(data, originX, originY) {
             width={RECT_SIZE * 2}
             height={RECT_SIZE}
             text={`${data.result}=${data.prosses}`}
-            fill="black"
+            fill="white"
             fontSize={14}
             align="center"
         />,
         "loop": <Text
-            x={originX}
+            x={originX + 15}
             y={originY + RECT_SIZE / 3}
-            width={RECT_SIZE}
-            height={RECT_SIZE}
+            width={RECT_SIZE / 2}
+            height={RECT_SIZE / 2}
             text={`i=${data.value}`}
             fill="white"
             fontSize={14}
-            align="black"
         />,
         "statement": <Text
             x={originX}
             y={originY + RECT_SIZE / 2}
             width={RECT_SIZE}
-            height={RECT_SIZE / 2}
+            height={RECT_SIZE / 4}
             text={`${data.control}`}
-            fill="black"
+            fill="white"
             fontSize={14}
             align="center"
         />

@@ -5,6 +5,9 @@ import Variable from "./Content/Variable";
 import "./DocPage.css";
 import "./Content/Content.css";
 import Expression from "./Content/Expression";
+import Print from "./Content/Print";
+import Loop from "./Content/Loop";
+import Condition from "./Content/Condition";
 
 class DocPage extends React.Component {
     constructor(props) {
@@ -33,6 +36,15 @@ class DocPage extends React.Component {
         else if (this.state.content === "Expression") {
             content = <Expression/>
         }
+        else if (this.state.content === "Print"){
+            content = <Print/>
+        }
+        else if (this.state.content === "Loop"){
+            content = <Loop/>
+        }
+        else if (this.state.content === "Condition"){
+            content = <Condition/>
+        }
         else {
             content = <FirstPanel/>
         }
@@ -43,9 +55,9 @@ class DocPage extends React.Component {
                         <p onClick={() => this.onChangeContent("Fundamental")}>Başlangıç</p>
                         <p onClick={() => this.onChangeContent("Variable")}>Değişken</p>
                         <p onClick={() => this.onChangeContent("Expression")}>İşlem</p>
-                        <p>Koşul</p>
-                        <p>Döngü</p>
-                        <p>Yazdır</p>
+                        <p onClick={() => this.onChangeContent("Condition")}>Koşul</p>
+                        <p onClick={() => this.onChangeContent("Loop")}>Döngü</p>
+                        <p onClick={() => this.onChangeContent("Print")}>Yazdır</p>
                     </div>
                     <div className="doc__side">
                         { content }
