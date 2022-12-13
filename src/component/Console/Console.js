@@ -63,7 +63,7 @@ class Console extends React.Component {
                 if (res === false) {
                     printTextList.push("Condition not compiled");
                 }
-                else {
+                else if (res){
                     printTextList.push(res);
                 }
             }

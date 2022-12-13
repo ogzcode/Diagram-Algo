@@ -19,7 +19,13 @@ class VariableInput extends React.Component {
     }
     handleBtnClick(value) {
         if (value) {
-            if ((this.state.value && this.state.name) || this.state.value === 0) {
+            if (this.state.name === ""){
+                this.setState({
+                    errorState: true,
+                    errorMessageList: ["Değişken ismi boş olamaz!", "Değişken değeri boş olamaz!"]
+                });
+            }
+            else if (this.state.value || this.state.value === 0) {
                 this.props.onClick({
                     name: this.state.name,
                     value: this.state.value

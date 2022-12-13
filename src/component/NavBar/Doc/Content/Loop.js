@@ -35,7 +35,7 @@ function Loop(){
                  sol üst köşesinde mor renkli bir daire olmalıdır.
             </p>
             <p className="content__text">
-                -Eğer aşağıdaki şekilde olduğu gibiyse döngü içerisinde aritmekik işlem 
+                -Eğer aşağıdaki şekilde olduğu gibiyse döngü içerisinde aritmetik işlem 
                 tanımlayabilirsiniz.
             </p>
             <div className="img var--img--3">

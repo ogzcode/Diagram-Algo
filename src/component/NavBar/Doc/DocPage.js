@@ -27,27 +27,22 @@ class DocPage extends React.Component {
     render() {
         let content = null;
 
-        if (this.state.content === "Fundamental"){
-            content = <Fundamental/>
-        }
-        else if (this.state.content === "Variable"){
-            content = <Variable/>
-        }
-        else if (this.state.content === "Expression") {
-            content = <Expression/>
-        }
-        else if (this.state.content === "Print"){
-            content = <Print/>
-        }
-        else if (this.state.content === "Loop"){
-            content = <Loop/>
-        }
-        else if (this.state.content === "Condition"){
-            content = <Condition/>
+        let panels = {
+            "Fundamental": <Fundamental/>,
+            "Variable": <Variable/>,
+            "Expression": <Expression/>,
+            "Print": <Print/>,
+            "Loop": <Loop/>,
+            "Condition": <Condition/>,
+        };
+
+        if (this.state.content !== ""){
+            content = panels[this.state.content];
         }
         else {
             content = <FirstPanel/>
         }
+        
         return (
             <div className="doc__container">
                 <div className="doc__inner">

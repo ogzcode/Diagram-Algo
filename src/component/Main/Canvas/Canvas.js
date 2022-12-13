@@ -113,8 +113,8 @@ function getText(data, originX, originY) {
         "loop": <Text
             x={originX + 15}
             y={originY + RECT_SIZE / 3}
-            width={RECT_SIZE / 2}
-            height={RECT_SIZE / 2}
+            width={RECT_SIZE}
+            height={RECT_SIZE / 4}
             text={`i=${data.value}`}
             fill="white"
             fontSize={14}

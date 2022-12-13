@@ -33,7 +33,26 @@ class LoopInput extends React.Component {
         this.setState({value: 0});
     }
     handleChange(e){
-        this.setState({value: e.target.value});
+        let value = parseInt(e.target.value);
+
+        if (value === 0){
+            this.setState({
+                value: value
+            });
+            return;
+        }
+        if (!Number.isInteger(value) || isNaN(value)) {
+            this.setState({
+                value: 0,
+                errorState: true,
+                errorMessageList: ["Döngü değeri pozitif sayılardan oluşmalıdır!"]
+            });
+        }
+        else {
+            this.setState({
+                value: value
+            });
+        }
     }
     handleErrorClick() {
         let error = !this.state.errorState;
@@ -49,7 +68,7 @@ class LoopInput extends React.Component {
                 />
                 <div>
                     <label>DÖNGÜ SAYISI</label>
-                    <input type="number" 
+                    <input type="text" 
                         value={this.state.value}
                         onChange={this.handleChange}
                         placeholder="Döngü tekrar sayısı giriniz..."
