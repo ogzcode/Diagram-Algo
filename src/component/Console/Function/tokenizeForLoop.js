@@ -1,15 +1,25 @@
 import tokenizeForOperation from "./tokenizeForOperation";
+import tokenizeForPrint from "./tokenizeForPrint";
 
-function tokenizeForLoop(d, variableList){
-    for (let i = 0; i < d.value; i++){
-        for (let j of d.statements){
-            if (j.type === "operation"){
-                let res = tokenizeForOperation(j, variableList);
-                if (res){
-                    return res;
-                }
+function calcLoopStatement(statementList, variableList, printTextList) {
+    for (let i of statementList) {
+        if (i.type === "operation") {
+            let res = tokenizeForOperation(i, variableList);
+            if (res) {
+                printTextList.push(res);
             }
         }
+        else if (i.type === "print"){
+            let res = tokenizeForPrint(i.value.split(" "), variableList);
+            printTextList.push(res);
+        }
+    }
+}
+
+
+function tokenizeForLoop(d, variableList, printTextList) {
+    for (let i = 0; i < d.value; i++) {
+        calcLoopStatement(d.statements, variableList, printTextList)
     }
 }
 

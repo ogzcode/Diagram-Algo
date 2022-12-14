@@ -35,7 +35,7 @@ class App extends React.Component {
     const data = this.state.data.slice();
 
     if (this.state.loopState && data[data.length - 1].type === "loop") {
-      if (value.type === "operation") {
+      if (value.type === "operation" || value.type === "print") {
         data[data.length - 1].statements.push(value);
       }
       else {

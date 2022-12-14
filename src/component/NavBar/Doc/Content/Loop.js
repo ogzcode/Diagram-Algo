@@ -9,12 +9,12 @@ function Loop(){
         <div className="content">
             <h2 className="content__head">Döngü Şekli</h2>
             <p className="content__text">
-                Bu şekil aritmetik işlemleri belirli bir sayıda tekrar etmenize olanak sağlar.
-                Sadece aritmetik işlemler ile kullanılabilir.
+                Bu şekil aritmetik işlemleri ve yazdır işlemini 
+                belirli bir sayıda tekrar etmenize olanak sağlar.
             </p>
             <br></br>
             <p className="content__text">
-                <i>NOT: Diğer işlem şekilleri ile kullanılamaz.</i>
+                <i>NOT: Döngü içerisinde değişken tanımlayamazsınız</i>
             </p>
             <div className="img var--img">
                 <img src={loop} alt="döngü_resmi"/>
@@ -35,7 +35,7 @@ function Loop(){
                  sol üst köşesinde mor renkli bir daire olmalıdır.
             </p>
             <p className="content__text">
-                -Eğer aşağıdaki şekilde olduğu gibiyse döngü içerisinde aritmetik işlem 
+                -Eğer aşağıdaki şekilde olduğu gibiyse döngü içerisinde aritmetik veya yazdır işlemini 
                 tanımlayabilirsiniz.
             </p>
             <div className="img var--img--3">

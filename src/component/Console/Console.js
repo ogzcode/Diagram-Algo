@@ -61,11 +61,7 @@ class Console extends React.Component {
                 tokenizeForCondition(d, variableList, printTextList);
             }
             else if (d.type === "loop"){
-                let res = tokenizeForLoop(d, variableList);
-
-                if (res === false){
-                    printTextList.push("Loop Error");
-                }
+                tokenizeForLoop(d, variableList, printTextList);
             }
         }
 
@@ -84,7 +80,7 @@ class Console extends React.Component {
                 <div className="text__field">
                     {
                         this.state.printTextList.map((text, index) => (
-                            <p key={index}>#    {text}</p>
+                            <p key={index}>{index} #    {text}</p>
                         ))
                     }
                 </div>
