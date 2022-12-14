@@ -130,7 +130,7 @@ function getText(data, originX, originY) {
             align="center"
         />
     };
-    
+
     return text[data.type];
 }
 
@@ -146,6 +146,15 @@ function getLength(list) {
         }
     }
     return len;
+}
+
+function getActiveCircle(color) {
+    return <Circle
+        x={20}
+        y={20}
+        radius={10}
+        fill="#5555df"
+    />
 }
 
 class Canvas extends React.Component {

@@ -58,7 +58,7 @@ class Console extends React.Component {
                 }
             }
             else if (d.type === "statement") {
-                let res = tokenizeForCondition(d, variableList);
+                let res = tokenizeForCondition(d, variableList, printTextList);
 
                 if (res === false) {
                     printTextList.push("Condition not compiled");

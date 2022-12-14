@@ -47,7 +47,7 @@ class App extends React.Component {
       }
     }
     else if (this.state.condState && data[data.length - 1].type === "statement") {
-      if (value.type === "operation") {
+      if (value.type === "operation" || value.type === "print") {
         data[data.length - 1].statements.push(value);
       }
       else {
