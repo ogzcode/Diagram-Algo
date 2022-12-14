@@ -48,13 +48,14 @@ function tokenizeCond(condArray, variableList) {
     return data;
 }
 
-function calcCondition(condList, variableList, printTextList) {
+function calcConditionList(condList, variableList, printTextList) {
     for (let i of condList) {
         if (i.type === "operation") {
             let res = tokenizeForOperation(i, variableList);
 
             if (res) {
-                return res;
+                printTextList.push(res);
+                break;
             }
         }
         else if (i.type === "print"){
@@ -66,29 +67,22 @@ function calcCondition(condList, variableList, printTextList) {
 
 function tokenizeForCondition(operation, variableList, printTextList) {
     let result = tokenizeCond(operation.control.split(" "), variableList);
-    if (!result) {
-        return `Hata! > "${operation.control}" işlemi derlenemedi!!`;
+    if (result === false) {
+        printTextList.push(`Hata! > "${operation.control}" işlemi derlenemedi!!`);
+        return;
     }
-
-    const calc = (statementList, variableList, printTextList) => {
-        let res = calcCondition(statementList, variableList, printTextList);
-
-        if (res) {
-            return res;
-        }
-    };
 
     if (result.operator === ">" && result.firstVar > result.secondVar) {
-        calc(operation.statements, variableList, printTextList);
+        calcConditionList(operation.statements, variableList, printTextList);
     }
     else if (result.operator === "<" && result.firstVar < result.secondVar) {
-        calc(operation.statements, variableList, printTextList);
+        calcConditionList(operation.statements, variableList, printTextList);
     }
     else if (result.operator === "=" && result.firstVar === result.secondVar) {
-        calc(operation.statements, variableList, printTextList);
+        calcConditionList(operation.statements, variableList, printTextList);
     }
     else if (result.operator === "!" && result.firstVar !== result.secondVar) {
-        calc(operation.statements, variableList, printTextList);
+        calcConditionList(operation.statements, variableList, printTextList);
     }
 }
 
