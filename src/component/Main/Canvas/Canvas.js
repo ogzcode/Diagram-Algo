@@ -6,7 +6,16 @@ const SHAPE_MARGIN = 20;
 const RECT_SIZE = 50
 const CIRCLE_SIZE = 25
 
-function getShape(type, originX, originY, border, func = null, activeState = null) {
+function getBorder(shapeType) {
+    let borders = {
+        "state": "#13b913",
+        "loop": "#5555df"
+    };
+
+    return {"color": borders[shapeType], "width": 4};
+}
+
+function getShape(type, originX, originY, border, func = null) {
     if (type === "variable") {
         return <Rect
             x={originX}
@@ -18,33 +27,27 @@ function getShape(type, originX, originY, border, func = null, activeState = nul
         />;
     }
     else if (type === "print") {
+        let stroke = getBorder(border);
         return <Circle
             x={originX + CIRCLE_SIZE}
             y={originY + CIRCLE_SIZE}
             radius={CIRCLE_SIZE}
             fill="#ff5ca8"
+            stroke={stroke.color}
+            strokeWidth={stroke.width}
             key={originY}
         />;
     }
     else if (type === "operation") {
-        let color;
-        let width;
-        if (border === "state") {
-            color = "#13b913";
-            width = 4;
-        }
-        else if (border === "loop") {
-            color = "#5555df";
-            width = 4;
-        }
+        let stroke = getBorder(border);
         return <Rect
             x={originX - RECT_SIZE / 2}
             y={originY}
             width={RECT_SIZE * 2}
             height={RECT_SIZE}
             fill="#f7e600"
-            stroke={color}
-            strokeWidth={width}
+            stroke={stroke.color}
+            strokeWidth={stroke.width}
             key={originY}
         />;
     }
@@ -56,8 +59,6 @@ function getShape(type, originX, originY, border, func = null, activeState = nul
             height={RECT_SIZE}
             fill="#13b913"
             rotation={45}
-            stroke={activeState === "cond" ? "black" : ""}
-            strokeWidth={activeState === "cond" ? 2 : 0}
             onClick={func}
             key={originY}
         />;
@@ -70,8 +71,6 @@ function getShape(type, originX, originY, border, func = null, activeState = nul
             height={RECT_SIZE}
             fill="#5555df"
             cornerRadius={[RECT_SIZE, RECT_SIZE, RECT_SIZE, RECT_SIZE]}
-            stroke={activeState === "loop" ? "black" : ""}
-            strokeWidth={activeState === "loop" ? 2 : 0}
             onClick={func}
             key={originY}
         />;
@@ -153,7 +152,7 @@ function getActiveCircle(color) {
         x={20}
         y={20}
         radius={10}
-        fill="#5555df"
+        fill={color}
     />
 }
 
@@ -194,38 +193,25 @@ class Canvas extends React.Component {
         let shapeLen = this.state.shapeList.length;
         let lastIndex = data.length - 1;
         if (dataLen > shapeLen) {
+            let d = null;
             if (data[lastIndex].type === "loop" && data[lastIndex].statements.length > 0) {
                 let elem = data[lastIndex].statements[data[lastIndex].statements.length - 1];
-                const d = this.drawShapes(elem, "loop");
-                this.setState({
-                    shapeList: d.shapeList,
-                    lineList: d.lineList,
-                    textList: d.textList,
-                    originX: d.originX,
-                    originY: d.originY
-                });
+                d = this.drawShapes(elem, "loop");
             }
             else if (data[lastIndex].type === "statement" && data[lastIndex].statements.length > 0) {
                 let elem = data[lastIndex].statements[data[lastIndex].statements.length - 1];
-                const d = this.drawShapes(elem, "state");
-                this.setState({
-                    shapeList: d.shapeList,
-                    lineList: d.lineList,
-                    textList: d.textList,
-                    originX: d.originX,
-                    originY: d.originY
-                });
+                d = this.drawShapes(elem, "state");
             }
             else {
-                const d = this.drawShapes(data[data.length - 1], null);
-                this.setState({
-                    shapeList: d.shapeList,
-                    lineList: d.lineList,
-                    textList: d.textList,
-                    originX: d.originX,
-                    originY: d.originY
-                });
+                d = this.drawShapes(data[data.length - 1], null);
             }
+            this.setState({
+                shapeList: d.shapeList,
+                lineList: d.lineList,
+                textList: d.textList,
+                originX: d.originX,
+                originY: d.originY
+            });
         }
         else if (dataLen < getLength(prevProps.data)) {
             this.setState({
@@ -283,24 +269,10 @@ class Canvas extends React.Component {
     }
     isActive() {
         if (this.props.loopState) {
-            return (
-                <Circle
-                    x={20}
-                    y={20}
-                    radius={10}
-                    fill="#5555df"
-                />
-            );
+            return getActiveCircle("#5555df");
         }
         else if (this.props.condState) {
-            return (
-                <Circle
-                    x={20}
-                    y={20}
-                    radius={10}
-                    fill="#13b913"
-                />
-            );
+            return getActiveCircle("#13b913");
         }
     }
     render() {

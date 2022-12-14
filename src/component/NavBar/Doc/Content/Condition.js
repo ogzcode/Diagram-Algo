@@ -9,8 +9,8 @@ function Condition() {
         <div className="content">
             <h2 className="content__head">Koşul Şekli</h2>
             <p className="content__text">
-                -Bu şekil belirli bir koşulun geçerli olması halinde bazı 
-                aritmetik işlemlerin yapılmasını sağlar.
+                -Bu şekil belirli bir koşulun geçerli olması halinde 
+                aritmetik işlemlerin ve yazdır işleminin yapılmasını sağlar.
             </p>
             <p className="content__text">
                 -Aşağıda kullanılabilecek koşul operatörleri verilmiştir.
@@ -53,7 +53,7 @@ function Condition() {
                  sol üst köşesinde yeşil renkli bir daire olmalıdır.
             </p>
             <p className="content__text">
-                -Eğer aşağıdaki şekilde olduğu gibiyse koşul içerisinde aritmetik işlem 
+                -Eğer aşağıdaki şekilde olduğu gibiyse koşul içerisinde aritmetik işlem veya yazdır işlemi
                 tanımlayabilirsiniz.
             </p>
             <div className="img var--img--3">
