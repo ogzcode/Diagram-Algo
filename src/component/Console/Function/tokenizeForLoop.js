@@ -1,5 +1,6 @@
 import tokenizeForOperation from "./tokenizeForOperation";
 import tokenizeForPrint from "./tokenizeForPrint";
+import tokenizeForCondition from "./tokenizeForCondition";
 
 function calcLoopStatement(statementList, variableList, printTextList) {
     for (let i of statementList) {
@@ -12,6 +13,9 @@ function calcLoopStatement(statementList, variableList, printTextList) {
         else if (i.type === "print"){
             let res = tokenizeForPrint(i.value.split(" "), variableList);
             printTextList.push(res);
+        }
+        else if (i.type === "statement"){
+            tokenizeForCondition(i, variableList, printTextList);
         }
     }
 }

@@ -33,28 +33,73 @@ class App extends React.Component {
   }
   handleGetData(value) {
     const data = this.state.data.slice();
+    let lastData = data[data.length - 1];//Listedeki son değer
 
-    if (this.state.loopState && data[data.length - 1].type === "loop") {
-      if (value.type === "operation" || value.type === "print") {
-        data[data.length - 1].statements.push(value);
+    if (this.state.loopState && lastData.type === "loop") {
+      /*
+      Döngünün aktif olma durumu.
+        1.Durum:
+          Gelen ifade İşlem, Yazdır veya Koşuldur ise direk döngü listesine atılır.
+        2.Durum
+          Döngü listesinin son elemanı Koşuldur.
+          Koşul aktifdir:
+           Gelen değer İşlem veya Yazdır ise koşulun listesine atılır.
+          Koşul aktif değildir:
+            Felen değer döngü listesine atılır.
+
+      */
+      let lastStatmentData = lastData.statements[lastData.statements.length - 1];
+      //Dögünün listesi
+
+      if (this.state.condState && lastStatmentData.type === "statement"){
+        //Son ifade Koşuldur ve Koşul aktiftir.
+
+        let condList = lastStatmentData.statements;
+        //Koşulun listesi
+
+        if (value.type === "operation" || value.type === "print") {
+          //Gelen değerler İşlem ve Yazdırdır
+          //Bu durumda koşul listesine atılır.
+          condList.push(value);
+        }
+        else {
+          //Değilse hata verir.
+          this.setState({ 
+            condState: false,
+            errorState: true,
+            errorMessageList: ["Koşul içerisinde sadece İşlem ve Yazdır kullanılabilir."]
+           });
+        }
+      }
+      else if (value.type === "operation" || value.type === "print" || value.type === "statement") {
+        //İşlem, Yazdır ve Koşuldan biri gelmiştir.
+        lastData.statements.push(value);
       }
       else {
+        //Değişken veya ikinci döngü gelmesi durumu.
         this.setState({ 
           loopState: false,
           errorState: true,
-          errorMessageList: ["Döngü içerisinde sadece İşlem kullanılabilir."]
+          errorMessageList: ["Döngü içerisinde sadece İşlem, Yazdır ve Koşul kullanılabilir."]
         });
       }
     }
-    else if (this.state.condState && data[data.length - 1].type === "statement") {
+    else if (this.state.condState && lastData.type === "statement") {
+      /*
+        Burası eğer tek başına Koşul kullanılacaksa geçerlidir.
+        Kullanımı:
+          -Koşulun aktif olması.
+          -Koşulun genel listenin en sonunda olması.
+          -Koşulun içerisine atılacak ifadenin İşlem veya Yazdır olması.
+      */
       if (value.type === "operation" || value.type === "print") {
-        data[data.length - 1].statements.push(value);
+        lastData.statements.push(value);
       }
       else {
         this.setState({ 
           condState: false,
           errorState: true,
-          errorMessageList: ["Koşul içerisinde sadece İşlem kullanılabilir."]
+          errorMessageList: ["Koşul içerisinde sadece İşlem veya Yazdır kullanılabilir."]
          });
       }
     }
@@ -64,12 +109,21 @@ class App extends React.Component {
     this.setState({ data: data });
   }
   handleLoop(value) {
-    if (this.state.data[this.state.data.length - 1].type === "loop") {
+    let lastData = this.state.data[this.state.data.length - 1];
+    if (lastData.type === "loop") {
       this.setState({ loopState: value });
     }
   }
   handleCond(value) {
-    if (this.state.data[this.state.data.length - 1].type === "statement") {
+    let lastData = this.state.data[this.state.data.length - 1];
+
+    if (lastData.type === "loop"){
+      if (lastData.statements[lastData.statements.length - 1].type === "statement"){
+        this.setState({condState: value});
+      }
+    }
+
+    if (lastData.type === "statement") {
       this.setState({ condState: value });
     }
   }

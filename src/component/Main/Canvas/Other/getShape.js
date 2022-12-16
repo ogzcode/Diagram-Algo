@@ -40,6 +40,7 @@ function getShape(type, originX, originY, border, func = null) {
         />;
     }
     else if (type === "statement") {
+        let stroke = getBorder(border); 
         return <Rect
             x={originX + (RECT_SIZE / 2) / Math.pow(2, 1 / 2) + 8}
             y={originY - 2}
@@ -47,6 +48,8 @@ function getShape(type, originX, originY, border, func = null) {
             height={RECT_SIZE}
             fill="#13b913"
             rotation={45}
+            stroke={stroke.color}
+            strokeWidth={stroke.width}
             onClick={func}
             key={originY}
         />;

@@ -49,7 +49,13 @@ class Canvas extends React.Component {
             let d = null;
             if (data[lastIndex].type === "loop" && data[lastIndex].statements.length > 0) {
                 let elem = data[lastIndex].statements[data[lastIndex].statements.length - 1];
-                d = this.drawShapes(elem, "loop");
+                if (elem.type === "statement" && elem.statements.length > 0){
+                    let elem2 = elem.statements[elem.statements.length - 1];
+                    d = this.drawShapes(elem2, "loop&state");
+                }
+                else {
+                    d = this.drawShapes(elem, "loop");
+                }
             }
             else if (data[lastIndex].type === "statement" && data[lastIndex].statements.length > 0) {
                 let elem = data[lastIndex].statements[data[lastIndex].statements.length - 1];
@@ -87,7 +93,7 @@ class Canvas extends React.Component {
             shapeList.push(getShape(data.type, originX, originY, null, this.handleLoopClick));
         }
         else if (data.type === "statement") {
-            shapeList.push(getShape(data.type, originX, originY, null, this.handleCondClick));
+            shapeList.push(getShape(data.type, originX, originY, border, this.handleCondClick));
         }
         else {
             shapeList.push(getShape(data.type, originX, originY, border));
@@ -122,10 +128,13 @@ class Canvas extends React.Component {
     }
     isActive() {
         if (this.props.loopState) {
+            if (this.props.condState){
+                return [getActiveCircle("#5555df"), getActiveCircle("#13b913", 40)];
+            }
             return getActiveCircle("#5555df");
         }
         else if (this.props.condState) {
-            return getActiveCircle("#13b913");
+            return getActiveCircle("#13b913", 20);
         }
     }
     render() {
