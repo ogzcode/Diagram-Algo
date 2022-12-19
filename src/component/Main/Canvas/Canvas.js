@@ -128,7 +128,7 @@ class Canvas extends React.Component {
     }
     isActive() {
         if (this.props.loopState) {
-            if (this.props.condState){
+            if (this.props.condState) {
                 return [getActiveCircle("#5555df"), getActiveCircle("#13b913", 40)];
             }
             return getActiveCircle("#5555df");
