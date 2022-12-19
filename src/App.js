@@ -22,6 +22,12 @@ class App extends React.Component {
     this.handleLoop = this.handleLoop.bind(this);
     this.handleCond = this.handleCond.bind(this);
     this.handleErrorClick = this.handleErrorClick.bind(this);
+    this.handleExportBtn = this.handleExportBtn.bind(this);
+  }
+  handleExportBtn(data){
+    this.setState({
+      data: data
+    });
   }
   handleRun(value) {
     this.setState({
@@ -139,7 +145,12 @@ class App extends React.Component {
           errorMessageList={this.state.errorMessageList}
           onClick={this.handleErrorClick}
         />
-        <NavBar onClick={this.handleRun} onDelete={this.handleDelete} />
+        <NavBar 
+          data={this.state.data}
+          onClick={this.handleRun} 
+          onDelete={this.handleDelete} 
+          onExport={this.handleExportBtn}
+        />
         <Main onClick={this.handleGetData}
           data={this.state.data}
           loopState={this.state.loopState}

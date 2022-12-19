@@ -41,3 +41,13 @@
     margin-left: 1rem;
     background-color: rgb(15, 112, 238);
 }
+
+.import--btn {
+    margin-left: 1rem;
+    background-color: orange;
+}
+
+.export--btn {
+    margin-left: 1rem;
+    background-color: purple;
+}
