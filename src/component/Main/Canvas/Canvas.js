@@ -44,35 +44,83 @@ class Canvas extends React.Component {
         let data = this.props.data;
         let dataLen = getLength(data);
         let shapeLen = this.state.shapeList.length;
-        let lastIndex = data.length - 1;
         if (dataLen > shapeLen) {
+            let shape = [];
+            let line = [];
+            let text = [];
+            let originX = this.state.originX;
+            let originY = 20;
             let d = null;
-            if (data[lastIndex].type === "loop" && data[lastIndex].statements.length > 0) {
-                let elem = data[lastIndex].statements[data[lastIndex].statements.length - 1];
-                if (elem.type === "statement" && elem.statements.length > 0){
-                    let elem2 = elem.statements[elem.statements.length - 1];
-                    d = this.drawShapes(elem2, "loop&state");
+            for (let i of data) {
+                if (i.type === "loop" && i.statements.length > 0) {
+                    d = this.drawShapes(i, null, originX, originY);
+
+                    shape.push(d[0]);
+                    line.push(d[1]);
+                    text.push(d[2]);
+                    originY = d[3];
+
+                    for (let j of i.statements) {
+                        if (j.type === "statement") {
+                            d = this.drawShapes(j, "loop", originX, originY);
+                            shape.push(d[0]);
+                            line.push(d[1]);
+                            text.push(d[2]);
+                            originY = d[3];
+
+                            if (j.statements.length > 0){
+                                for (let elem of j.statements) {
+                                    d = this.drawShapes(elem, "loop&state", originX, originY);
+                                    shape.push(d[0]);
+                                    line.push(d[1]);
+                                    text.push(d[2]);
+                                    originY = d[3];
+                                }
+                            }
+                        }
+                        else {
+                            d = this.drawShapes(j, "loop", originX, originY);
+                            shape.push(d[0]);
+                            line.push(d[1]);
+                            text.push(d[2]);
+                            originY = d[3];
+                        }
+                    }
+                }
+                else if (i.type === "statement" && i.statements.length > 0) {
+                    d = this.drawShapes(i, null, originX, originY);
+
+                    shape.push(d[0]);
+                    line.push(d[1]);
+                    text.push(d[2]);
+                    originY = d[3];
+
+                    for (let elem of i.statements) {
+                        d = this.drawShapes(elem, "state", originX, originY);
+                        shape.push(d[0]);
+                        line.push(d[1]);
+                        text.push(d[2]);
+                        originY = d[3];
+                    }
                 }
                 else {
-                    d = this.drawShapes(elem, "loop");
+                    d = this.drawShapes(i, null, originX, originY);
                 }
+                shape.push(d[0]);
+                line.push(d[1]);
+                text.push(d[2]);
+                originY = d[3];
             }
-            else if (data[lastIndex].type === "statement" && data[lastIndex].statements.length > 0) {
-                let elem = data[lastIndex].statements[data[lastIndex].statements.length - 1];
-                d = this.drawShapes(elem, "state");
-            }
-            else {
-                d = this.drawShapes(data[data.length - 1], null);
-            }
+
             this.setState({
-                shapeList: d.shapeList,
-                lineList: d.lineList,
-                textList: d.textList,
-                originX: d.originX,
-                originY: d.originY
+                shapeList: shape,
+                lineList: line,
+                textList: text,
+                originY: originY
             });
+
         }
-        else if (dataLen < getLength(prevProps.data)) {
+        else if (dataLen < getLength(prevProps.data) || prevProps.data !== data) {
             this.setState({
                 shapeList: [],
                 lineList: [],
@@ -82,54 +130,43 @@ class Canvas extends React.Component {
             });
         }
     }
-    drawShapes(data, border) {
-        const shapeList = this.state.shapeList.slice();
-        const lineList = this.state.lineList.slice();
-        const textList = this.state.textList.slice();
-        let originX = this.state.originX;
-        let originY = this.state.originY;
+    drawShapes(data, border, originX, originY) {
+        let shape = null;
+        let text = null;
+        let line = null;
 
         if (data.type === "loop") {
-            shapeList.push(getShape(data.type, originX, originY, null, this.handleLoopClick));
+            shape = getShape(data.type, originX, originY, null, this.handleLoopClick);
         }
         else if (data.type === "statement") {
-            shapeList.push(getShape(data.type, originX, originY, border, this.handleCondClick));
+            shape = getShape(data.type, originX, originY, border, this.handleCondClick);
         }
         else {
-            shapeList.push(getShape(data.type, originX, originY, border));
+            shape = getShape(data.type, originX, originY, border);
         }
 
-        if (shapeList.length > 1) {
-            lineList.push(
+        if (originY > 20) {
+            line =
                 <Line
                     points={[originX + RECT_SIZE / 2, originY - SHAPE_MARGIN, originX + RECT_SIZE / 2, originY]}
                     stroke="black"
                     strokeWidth={3}
-                    key={lineList.length}
-                />
-            );
+                />;
         }
 
-        textList.push(getText(data, originX, originY));
+        text = getText(data, originX, originY);
 
         originY += RECT_SIZE + SHAPE_MARGIN;
 
         if (data.type === "statement") {
             originY += 10;
         }
-
-        return {
-            shapeList: shapeList,
-            lineList: lineList,
-            textList: textList,
-            originX: originX,
-            originY: originY
-        };
+        return [shape, line, text, originY];
     }
     isActive() {
         if (this.props.loopState) {
             if (this.props.condState) {
-                return [getActiveCircle("#5555df"), getActiveCircle("#13b913", 40)];
+                return [getActiveCircle("#5555df"), getActiveCircle("#13b913", 20)];
             }
             return getActiveCircle("#5555df");
         }

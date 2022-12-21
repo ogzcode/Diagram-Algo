@@ -11,7 +11,6 @@ function getShape(type, originX, originY, border, func = null) {
             width={RECT_SIZE}
             height={RECT_SIZE}
             fill="#ec0e33"
-            key={originY}
         />;
     }
     else if (type === "print") {
@@ -23,7 +22,6 @@ function getShape(type, originX, originY, border, func = null) {
             fill="#ff5ca8"
             stroke={stroke.color}
             strokeWidth={stroke.width}
-            key={originY}
         />;
     }
     else if (type === "operation") {
@@ -36,7 +34,6 @@ function getShape(type, originX, originY, border, func = null) {
             fill="#f7e600"
             stroke={stroke.color}
             strokeWidth={stroke.width}
-            key={originY}
         />;
     }
     else if (type === "statement") {
@@ -51,7 +48,6 @@ function getShape(type, originX, originY, border, func = null) {
             stroke={stroke.color}
             strokeWidth={stroke.width}
             onClick={func}
-            key={originY}
         />;
     }
     else if (type === "loop") {
@@ -63,7 +59,6 @@ function getShape(type, originX, originY, border, func = null) {
             fill="#5555df"
             cornerRadius={[RECT_SIZE, RECT_SIZE, RECT_SIZE, RECT_SIZE]}
             onClick={func}
-            key={originY}
         />;
     }
 }

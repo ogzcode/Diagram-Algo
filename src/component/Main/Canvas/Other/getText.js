@@ -14,7 +14,6 @@ function getText(data, originX, originY) {
             fill="white"
             fontSize={14}
             align="center"
-            key={originY}
         />,
         "variable": <Text
             x={originX}
@@ -25,7 +24,6 @@ function getText(data, originX, originY) {
             fill="white"
             fontSize={14}
             align="center"
-            key={originY}
         />,
         "operation": <Text
             x={originX - RECT_SIZE / 2}
@@ -36,7 +34,6 @@ function getText(data, originX, originY) {
             fill="white"
             fontSize={14}
             align="center"
-            key={originY}
         />,
         "loop": <Text
             x={originX + 15}
@@ -46,7 +43,6 @@ function getText(data, originX, originY) {
             text={`i=${data.value}`}
             fill="white"
             fontSize={14}
-            key={originY}
         />,
         "statement": <Text
             x={originX}
@@ -57,7 +53,6 @@ function getText(data, originX, originY) {
             fill="white"
             fontSize={14}
             align="center"
-            key={originY}
         />
     };
 
