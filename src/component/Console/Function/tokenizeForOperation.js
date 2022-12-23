@@ -89,7 +89,7 @@ function tokenizeForOperation(operation, variableList){
     let calc = calcExpression(post, variableList);
     let result = isVariable(operation.result, variableList);
 
-    if (!calc){
+    if (calc === false){
         return `Hata! > "${operation.prosses}" işlemi derlenemedi!!`;
     }
 
