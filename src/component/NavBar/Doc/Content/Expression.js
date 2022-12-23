@@ -39,6 +39,7 @@ function Expression() {
                 <li><i>İşlem</i> boşluğunda sadece +,-,*,/,% işlemleri kullanılabilir.</li>
                 <li><i>İşlem</i> boşluğunda parantez veya farklı bir karakter kullanmayınız.</li>
                 <li><i>İşlem</i> boşluğunda değişken kullanabilirsiniz</li>
+                <li><i>İşlem</i> boşluğunda kullandığınız ifadeler arasında boşluk kullanmayınız.</li>
             </ul>
             <p className="content__text">
                 Örnek İşlem girdileri.
@@ -48,6 +49,7 @@ function Expression() {
                 <li>24-12</li>
                 <li>var1*var2</li>
                 <li>24%var2+12</li>
+                <li><i>(Hatalı Girdi)</i>: variable  +* 12a</li>
             </ul>
         </div>
     );

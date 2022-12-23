@@ -25,7 +25,7 @@ class Import extends React.Component {
         return this.state.data.map((d, i) => (
                 <div className="shema" key={i}>
                     <div className="shema--left">
-                        <span className="shema--index">{i}</span>
+                        <span className="shema--index">{i}.</span>
                         <span className="shema--name">{d.name}</span>
                     </div>
                     <div className="shema--right">

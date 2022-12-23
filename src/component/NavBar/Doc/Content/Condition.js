@@ -49,6 +49,9 @@ function Condition() {
                 koşul şekline tıklayın.
             </p>
             <p className="content__text">
+                Eğer koşul aktif değilse girdiğiniz diğer işlemler koşul içerisinde değerlendirilmez.
+            </p>
+            <p className="content__text">
                 -Koşulun aktif olduğunu anlamak için <i>Çizim Ekranının </i>
                  sol üst köşesinde yeşil renkli bir daire olmalıdır.
             </p>

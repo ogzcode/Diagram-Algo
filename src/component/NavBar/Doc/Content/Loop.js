@@ -3,18 +3,19 @@ import loopInput from "./img/loop_input.png";
 import loopBorder from "./img/loop_border.png";
 import loopExample from "./img/loop_example.png";
 import loopActive from "./img/loop_active.png";
+import conditionIn from "./img/conditioninloop.png";
 
 function Loop(){
     return (
         <div className="content">
             <h2 className="content__head">Döngü Şekli</h2>
             <p className="content__text">
-                Bu şekil aritmetik işlemleri ve yazdır işlemini 
+                Bu şekil aritmetik işlemleri, yazdır işlemini ve koşul işlemini
                 belirli bir sayıda tekrar etmenize olanak sağlar.
             </p>
             <br></br>
             <p className="content__text">
-                <i>NOT: Döngü içerisinde değişken tanımlayamazsınız</i>
+                <i>NOT: Döngü içerisinde değişken tanımlayamazsınız.</i>
             </p>
             <div className="img var--img">
                 <img src={loop} alt="döngü_resmi"/>
@@ -31,11 +32,14 @@ function Loop(){
                 <i> Çizim Ekranında</i> döngü şekline tıklayınız.
             </p>
             <p className="content__text">
+                -Eğer döngü aktif değil ise tanımladığınız işlemler döngü içerisinde sayılmaz.
+            </p>
+            <p className="content__text">
                 -Döngünün aktif olduğunu anlamak için <i>Çizim Ekranının </i>
                  sol üst köşesinde mor renkli bir daire olmalıdır.
             </p>
             <p className="content__text">
-                -Eğer aşağıdaki şekilde olduğu gibiyse döngü içerisinde aritmetik veya yazdır işlemini 
+                -Eğer aşağıdaki şekilde olduğu gibiyse döngü içerisinde aritmetik, yazdır ve koşul işlemini 
                 tanımlayabilirsiniz.
             </p>
             <div className="img var--img--3">
@@ -46,6 +50,12 @@ function Loop(){
             </p>
             <div className="img var--img--3">
                 <img src={loopBorder} alt="kenarlı girdi"/>
+            </div>
+            <p className="content__text">
+                -Döngü içerisinde tanımlanmış koşulun içerisinde bulunan işlemler siyah kenarlıkla belirtilmiştir.
+            </p>
+            <div className="img var--img--3">
+                <img src={conditionIn} alt="kenarlı girdi"/>
             </div>
             <p className="content__text">
                 -Döngüden çıkmak için yeniden şekle tıklayabilirsiniz.

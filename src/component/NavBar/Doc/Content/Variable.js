@@ -7,7 +7,7 @@ function Variable(){
             <h2 className="content__head">Değişken Şekli</h2>
             <p className="content__text">
                 Değişken programınızdaki sayısal verileri tutan yapılardır.
-                Bu yapı sayesinde sayı tanımlayabilir ve atama işlemi yapabilirsiniz.
+                Bu yapı sayesinde pozitif sayıları program içerisinde kullanabilirsiniz.
             </p>
             <div className="img var--img">
                 <img src={variable} alt="navbar"/>

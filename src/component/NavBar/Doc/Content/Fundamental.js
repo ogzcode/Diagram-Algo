@@ -2,6 +2,13 @@ import navbar from"./img/navbar.png";
 import islem from "./img/islem.png";
 import input from "./img/input.png";
 import canvas from "./img/canvas.png";
+import deleteBtn from "./img/delete.png";
+import exportBtn from "./img/export.png";
+import editBtn from "./img/edit.png";
+import helpBtn from "./img/help.png";
+import runBtn from "./img/run.png";
+import editPage from "./img/edit_page.png";
+import exportPage from "./img/export_page.png";
 
 function Fundamental(){
     return (
@@ -12,11 +19,46 @@ function Fundamental(){
             <p className="content__text">Program 4 adet bölümden oluşmaktadır.</p>
             <h4 className="content__head">Ana Panel</h4>
             <p className="content__text">
-                -Bu panelde programı çalıştırmak, Çizim panelini temizlemek ve Yardım panelini açmak için
-                butonlar bulunur.
+                -Bu panelde programın genel kullanımı için butonlar bulunur.
             </p>
             <div className="img navbar--img">
                 <img src={navbar} alt="navbar"/>
+            </div>
+            <h5 className="content__head">Çalıştır Butonu</h5>
+            <p className="content__text">
+                -Bu buton programınızı çalıştırır ve program çıktısını gösteren konsol ekranını açar.
+            </p>
+            <div className="img var--img">
+                <img src={runBtn} alt="navbar"/>
+            </div>
+            <h5 className="content__head">Temizle Butonu</h5>
+            <p className="content__text">
+                -Bu buton çizim ekranını temizler.
+            </p>
+            <div className="img var--img">
+                <img src={deleteBtn} alt="navbar"/>
+            </div>
+            <h5 className="content__head">İçe Aktar Butonu</h5>
+            <p className="content__text">
+                -Bu buton daha önce kaydettiğiniz programları gösteren bir panel açar.
+                Bu panel içerisinde kaydettiğiniz programları içeri aktarabilirsiniz.
+            </p>
+            <div className="img var--img">
+                <img src={exportBtn} alt="navbar"/>
+            </div>
+            <h5 className="content__head">Kaydet Butonu</h5>
+            <p className="content__text">
+                -Bu buton programınızı bir isim vererek kaydetmenizi sağlar.
+            </p>
+            <div className="img var--img">
+                <img src={editBtn} alt="navbar"/>
+            </div>
+            <h5 className="content__head">Yardım Butonu</h5>
+            <p className="content__text">
+                -Bu buton program ile ilgili bilgileri bulabileceğiniz yardım panelini açar. 
+            </p>
+            <div className="img var--img">
+                <img src={helpBtn} alt="navbar"/>
             </div>
             <br></br>
             <h4 className="content__head">İşlem Paneli</h4>
@@ -48,6 +90,23 @@ function Fundamental(){
             </p>
             <div className="img">
                 <img src={canvas} alt="canvas"/>
+            </div>
+            <br></br>
+            <h4 className="content__head">Kaydet Paneli</h4>
+            <p className="content__text">
+                -Oluşturduğunuz mevcut projeye bir isim vererek kaydetmenizi sağlar. 
+            </p>
+            <div className="img">
+                <img src={editPage} alt="canvas"/>
+            </div>
+            <br></br>
+            <h4 className="content__head">Projeler Paneli</h4>
+            <p className="content__text">
+                -Daha önce kaydettiğiniz projelerin bulunduğu panel.Burada projeleri içeri aktarabilir veya
+                silebilirsiniz.
+            </p>
+            <div className="img">
+                <img src={exportPage} alt="canvas"/>
             </div>
             <br></br>
         </div>

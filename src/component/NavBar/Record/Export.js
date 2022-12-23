@@ -44,6 +44,7 @@ class Export extends React.Component {
                         value={this.state.value} 
                         onChange={this.handleOnChange}
                         style={this.state.isEmpty ? {borderColor: "red"} : {}}
+                        placeholder="Proje ismi giriniz..."
                     />
                     <button className="export__btn" onClick={this.handleExport}>Kaydet</button>
                     <button className="record__close__btn" onClick={this.handleOnClose}>X</button>
