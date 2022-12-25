@@ -6,7 +6,7 @@ class LoopInput extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value: 0,
+            value: "",
             errorState: false,
             errorMessageList: []
         };
@@ -16,10 +16,10 @@ class LoopInput extends React.Component {
     }
     handleBtnClick(value){
         if (value){
-            if (this.state.value > 0){
+            if (this.state.value !== ""){
                 this.props.onClick({value: this.state.value, statements: []});
             }
-            else {
+            /* else {
                 this.setState({
                     errorState: true,
                     errorMessageList: [
@@ -27,13 +27,15 @@ class LoopInput extends React.Component {
                         "Döngü değeri pozitif sayı olmalıdır!"
                     ]
                 });
-            }
+            } */
         }
 
-        this.setState({value: 0});
+        this.setState({value: ""});
     }
     handleChange(e){
-        let value = parseInt(e.target.value);
+        this.setState({value: e.target.value});
+
+        /* let value = parseInt(e.target.value);
 
         if (value === 0){
             this.setState({
@@ -52,7 +54,7 @@ class LoopInput extends React.Component {
             this.setState({
                 value: value
             });
-        }
+        } */
     }
     handleErrorClick() {
         let error = !this.state.errorState;
