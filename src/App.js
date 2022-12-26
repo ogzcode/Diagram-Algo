@@ -112,6 +112,7 @@ class App extends React.Component {
     else {
       data.push(value);
     }
+    console.log(data);
     this.setState({ data: data });
   }
   handleLoop(value) {

@@ -37,8 +37,7 @@ function tokenizeForLoop(d, variableList, printTextList) {
             return;
         }
     }
-
-    if (isNumeric(d.value)){
+    else if (isNumeric(d.value)){
         count = d.value;
     }
     else {
@@ -46,7 +45,9 @@ function tokenizeForLoop(d, variableList, printTextList) {
         return;
     }
     
-    for (let i = 0; i < count.value; i++) {
+    let c = typeof count === "object" ? count.value : count;
+
+    for (let i = 0; i < c; i++) {
         calcLoopStatement(d.statements, variableList, printTextList)
     }
 }

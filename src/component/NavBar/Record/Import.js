@@ -1,6 +1,7 @@
 //İçe aktar
 import "./Record.css";
 import React from "react";
+import example from "./example.json";
 
 class Import extends React.Component {
     constructor(props) {
@@ -14,8 +15,9 @@ class Import extends React.Component {
     }
     componentDidMount(){
         let data = JSON.parse(localStorage.getItem("projects")) || [];
+        console.log(example.example);
         this.setState({
-            data: data
+            data: data.concat(example.example)
         });
     }
     handleOnClose() {
@@ -25,7 +27,7 @@ class Import extends React.Component {
         return this.state.data.map((d, i) => (
                 <div className="shema" key={i}>
                     <div className="shema--left">
-                        <span className="shema--index">{i}.</span>
+                        <span className="shema--index">{i + 1}.</span>
                         <span className="shema--name">{d.name}</span>
                     </div>
                     <div className="shema--right">

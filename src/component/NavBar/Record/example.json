@@ -1,0 +1,336 @@
+{
+    "example": [
+        {
+            "name": "Dört İşlem",
+            "shema": [
+                {
+                    "name": "one",
+                    "value": 10,
+                    "type": "variable"
+                },
+                {
+                    "name": "two",
+                    "value": 5,
+                    "type": "variable"
+                },
+                {
+                    "name": "sum",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "name": "mult",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "name": "div",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "name": "sub",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "result": "sum",
+                    "prosses": "one+two",
+                    "type": "operation"
+                },
+                {
+                    "result": "mult",
+                    "prosses": "one*two",
+                    "type": "operation"
+                },
+                {
+                    "result": "div",
+                    "prosses": "one/two",
+                    "type": "operation"
+                },
+                {
+                    "result": "sub",
+                    "prosses": "one-two",
+                    "type": "operation"
+                },
+                {
+                    "value": "Toplama: $sum",
+                    "type": "print"
+                },
+                {
+                    "value": "Çıkarma: $sub",
+                    "type": "print"
+                },
+                {
+                    "value": "Çarpma: $mult",
+                    "type": "print"
+                },
+                {
+                    "value": "Bölme: $div",
+                    "type": "print"
+                }
+            ]
+        },
+        {
+            "name": "Büyük Küçük uygulaması",
+            "shema": [
+                {
+                    "name": "a",
+                    "value": 12,
+                    "type": "variable"
+                },
+                {
+                    "name": "b",
+                    "value": 15,
+                    "type": "variable"
+                },
+                {
+                    "control": "a < b",
+                    "statements": [
+                        {
+                            "value": "a, b den küçüktür",
+                            "type": "print"
+                        }
+                    ],
+                    "type": "statement"
+                },
+                {
+                    "control": "b > a",
+                    "statements": [
+                        {
+                            "value": "b, a dan büyüktür",
+                            "type": "print"
+                        }
+                    ],
+                    "type": "statement"
+                }
+            ]
+        },
+        {
+            "name": "1-15 arasındaki sayıları yaz",
+            "shema": [
+                {
+                    "name": "n",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "value": "15",
+                    "statements": [
+                        {
+                            "result": "n",
+                            "prosses": "n+1",
+                            "type": "operation"
+                        },
+                        {
+                            "value": "$n",
+                            "type": "print"
+                        }
+                    ],
+                    "type": "loop"
+                }
+            ]
+        },
+        {
+            "name": "5! hesaplama",
+            "shema": [
+                {
+                    "name": "fak",
+                    "value": 5,
+                    "type": "variable"
+                },
+                {
+                    "name": "n",
+                    "value": 1,
+                    "type": "variable"
+                },
+                {
+                    "name": "m",
+                    "value": 1,
+                    "type": "variable"
+                },
+                {
+                    "value": "fak",
+                    "statements": [
+                        {
+                            "result": "n",
+                            "prosses": "n*m",
+                            "type": "operation"
+                        },
+                        {
+                            "result": "m",
+                            "prosses": "m+1",
+                            "type": "operation"
+                        }
+                    ],
+                    "type": "loop"
+                },
+                {
+                    "value": "5 faktöriyel: $n",
+                    "type": "print"
+                }
+            ]
+        },
+        {
+            "name": "2^5 hesaplama",
+            "shema": [
+                {
+                    "name": "n",
+                    "value": 1,
+                    "type": "variable"
+                },
+                {
+                    "name": "m",
+                    "value": 2,
+                    "type": "variable"
+                },
+                {
+                    "name": "x",
+                    "value": 5,
+                    "type": "variable"
+                },
+                {
+                    "value": "x",
+                    "statements": [
+                        {
+                            "result": "n",
+                            "prosses": "n*m",
+                            "type": "operation"
+                        }
+                    ],
+                    "type": "loop"
+                },
+                {
+                    "value": "$n",
+                    "type": "print"
+                }
+            ]
+        },
+        {
+            "name": "1-10 arasındaki sayıların toplamı",
+            "shema": [
+                {
+                    "name": "n",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "name": "m",
+                    "value": 1,
+                    "type": "variable"
+                },
+                {
+                    "value": "10",
+                    "statements": [
+                        {
+                            "result": "n",
+                            "prosses": "n+m",
+                            "type": "operation"
+                        },
+                        {
+                            "result": "m",
+                            "prosses": "m+1",
+                            "type": "operation"
+                        }
+                    ],
+                    "type": "loop"
+                },
+                {
+                    "value": "$n",
+                    "type": "print"
+                }
+            ]
+        },
+        {
+            "name": "1-55 arasındaki çift sayı adeti",
+            "shema": [
+                {
+                    "name": "toplam",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "name": "n",
+                    "value": 1,
+                    "type": "variable"
+                },
+                {
+                    "name": "bol",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "value": "55",
+                    "statements": [
+                        {
+                            "result": "bol",
+                            "prosses": "n%2",
+                            "type": "operation"
+                        },
+                        {
+                            "control": "bol = 0",
+                            "statements": [
+                                {
+                                    "result": "toplam",
+                                    "prosses": "toplam+1",
+                                    "type": "operation"
+                                }
+                            ],
+                            "type": "statement"
+                        },
+                        {
+                            "result": "n",
+                            "prosses": "n+1",
+                            "type": "operation"
+                        }
+                    ],
+                    "type": "loop"
+                },
+                {
+                    "value": "$toplam",
+                    "type": "print"
+                }
+            ]
+        },
+        {
+            "name": "n sayısı tek mi çift mi",
+            "shema": [
+                {
+                    "name": "n",
+                    "value": 12,
+                    "type": "variable"
+                },
+                {
+                    "name": "s",
+                    "value": 0,
+                    "type": "variable"
+                },
+                {
+                    "result": "s",
+                    "prosses": "n%2",
+                    "type": "operation"
+                },
+                {
+                    "control": "s = 0",
+                    "statements": [
+                        {
+                            "value": "$n çifttir.",
+                            "type": "print"
+                        }
+                    ],
+                    "type": "statement"
+                },
+                {
+                    "control": "s ! 0",
+                    "statements": [
+                        {
+                            "value": "$n tektir.",
+                            "type": "print"
+                        }
+                    ],
+                    "type": "statement"
+                }
+            ]
+        }
+    ]
+}
