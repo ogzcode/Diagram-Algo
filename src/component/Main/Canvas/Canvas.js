@@ -24,9 +24,14 @@ class Canvas extends React.Component {
         };
         this.handleLoopClick = this.handleLoopClick.bind(this);
         this.handleCondClick = this.handleCondClick.bind(this);
+        this.handleDoubleClick = this.handleDoubleClick.bind(this);
     }
 
-    handleLoopClick() {
+    handleDoubleClick(data){
+        this.props.onDoubleClick(data);
+    }
+
+    handleLoopClick(e) {
         this.props.onLoopClick(!this.props.loopState);
     }
 
@@ -136,13 +141,13 @@ class Canvas extends React.Component {
         let line = null;
 
         if (data.type === "loop") {
-            shape = getShape(data.type, originX, originY, null, this.handleLoopClick);
+            shape = getShape(data, originX, originY, this.handleDoubleClick, null, this.handleLoopClick);
         }
         else if (data.type === "statement") {
-            shape = getShape(data.type, originX, originY, border, this.handleCondClick);
+            shape = getShape(data, originX, originY, this.handleDoubleClick, border, this.handleCondClick);
         }
         else {
-            shape = getShape(data.type, originX, originY, border);
+            shape = getShape(data, originX, originY, this.handleDoubleClick, border);
         }
 
         if (originY > 20) {
@@ -154,7 +159,7 @@ class Canvas extends React.Component {
                 />;
         }
 
-        text = getText(data, originX, originY);
+        text = getText(data, 550, originY);
 
         originY += RECT_SIZE + SHAPE_MARGIN;
 

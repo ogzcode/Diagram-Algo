@@ -6,53 +6,49 @@ const CIRCLE_SIZE = 25
 function getText(data, originX, originY) {
     const text = {
         "print": <Text
-            x={originX + CIRCLE_SIZE / 2}
+            x={originX}
             y={originY + CIRCLE_SIZE - CIRCLE_SIZE / 4}
-            width={CIRCLE_SIZE}
+            width={200}
             height={CIRCLE_SIZE}
             text={data.value}
-            fill="white"
-            fontSize={14}
-            align="center"
+            fill="black"
+            fontSize={18}
         />,
         "variable": <Text
             x={originX}
             y={originY + RECT_SIZE / 3}
-            width={RECT_SIZE}
+            width={200}
             height={RECT_SIZE}
             text={`${data.name}=${data.value}`}
-            fill="white"
-            fontSize={14}
-            align="center"
+            fill="black"
+            fontSize={18}
         />,
         "operation": <Text
-            x={originX - RECT_SIZE / 2}
+            x={originX}
             y={originY + RECT_SIZE / 3}
-            width={RECT_SIZE * 2}
+            width={200}
             height={RECT_SIZE}
             text={`${data.result}=${data.prosses}`}
-            fill="white"
-            fontSize={14}
-            align="center"
+            fill="black"
+            fontSize={18}
         />,
         "loop": <Text
-            x={originX + 15}
+            x={originX}
             y={originY + RECT_SIZE / 3}
-            width={RECT_SIZE}
+            width={200}
             height={RECT_SIZE / 4}
             text={`i=${data.value}`}
-            fill="white"
-            fontSize={14}
+            fill="black"
+            fontSize={18}
         />,
         "statement": <Text
             x={originX}
             y={originY + RECT_SIZE / 2}
-            width={RECT_SIZE}
+            width={200}
             height={RECT_SIZE / 4}
             text={`${data.control}`}
-            fill="white"
-            fontSize={14}
-            align="center"
+            fill="black"
+            fontSize={18}
         />
     };
 

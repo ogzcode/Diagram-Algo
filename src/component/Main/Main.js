@@ -29,6 +29,7 @@ class Main extends React.Component {
                     loopState={this.props.loopState}
                     condState={this.props.condState}
                     onCondClick={this.handleCondClick}
+                    onDoubleClick={this.props.onDoubleClick}
                 />
             </div>
         );

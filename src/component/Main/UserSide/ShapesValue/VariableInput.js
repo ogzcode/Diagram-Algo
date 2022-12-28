@@ -45,6 +45,19 @@ class VariableInput extends React.Component {
     }
     handleNameChange(e) {
         let value = e.target.value;
+
+        if (value.includes(" ")){
+            this.setState({
+                name: "",
+                value: 0,
+                errorState: true,
+                errorMessageList: [
+                    "Değişken ismi boşluk (' ') karakteri bulunduramaz!",
+                    "Kebak Case kullanınız(Örnek: merhabaDünya)"
+                ]
+            });
+            return;
+        }
         this.setState({
             name: value
         });
