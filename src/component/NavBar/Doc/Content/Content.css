@@ -29,23 +29,23 @@
 
 .content__head{
     color: rgb(95, 94, 94);
-    margin-bottom: .5rem;
+    margin-bottom: .25rem;
     margin-top: 1rem;
-    border-bottom: 1px solid #c4c4c4;
 }
 .content__text {
     color: gray;
     font-size: 14px;
+    line-height: 1.4rem;
 }
 .img {
     border: 1px solid #c4c4c4;
-    margin: 1rem 0;
+    margin-top: .5rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
 img {
     object-fit: contain;
-    width: 50%;
 }
 
 .var--img img {

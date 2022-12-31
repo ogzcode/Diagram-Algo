@@ -27,8 +27,9 @@
 }
 
 .doc__select__side p {
-    text-align: center;
+    text-align: left;
     padding: 1rem 0;
+    padding-left: 2.5rem;
     cursor: pointer;
     color: rgb(61, 61, 61);
 }

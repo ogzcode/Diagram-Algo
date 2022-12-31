@@ -24,6 +24,42 @@ class DocPage extends React.Component {
     onChangeContent(value){
         this.setState({content: value});
     }
+    getDocSelectSide(){
+        let content = [
+            {
+                "value": "Fundamental",
+                "name": "Başlangış"
+            },
+            {
+                "value": "Variable",
+                "name": "Değişken"
+            },
+            {
+                "value": "Expression",
+                "name": "İşlem"
+            },
+            {
+                "value": "Condition",
+                "name": "Koşul"
+            },
+            {
+                "value": "Loop",
+                "name": "Döngü"
+            },
+            {
+                "value": "Print",
+                "name": "Yazdır"
+            },
+        ];
+
+        return content.map((d, i) => 
+        <p onClick={() => this.onChangeContent(d.value)} key={i}>
+            <span style={{marginRight: ".25rem", fontSize: "16px"}}>&#9889;</span>
+            {d.name}
+        </p>
+        );
+    }
+
     render() {
         let content = null;
 
@@ -47,12 +83,7 @@ class DocPage extends React.Component {
             <div className="doc__container">
                 <div className="doc__inner">
                     <div className="doc__select__side">
-                        <p onClick={() => this.onChangeContent("Fundamental")}>Başlangıç</p>
-                        <p onClick={() => this.onChangeContent("Variable")}>Değişken</p>
-                        <p onClick={() => this.onChangeContent("Expression")}>İşlem</p>
-                        <p onClick={() => this.onChangeContent("Condition")}>Koşul</p>
-                        <p onClick={() => this.onChangeContent("Loop")}>Döngü</p>
-                        <p onClick={() => this.onChangeContent("Print")}>Yazdır</p>
+                        {this.getDocSelectSide()}
                     </div>
                     <div className="doc__side">
                         { content }
