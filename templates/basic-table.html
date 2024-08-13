@@ -1,0 +1,32 @@
+{% extends "./base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1>New Styled Table</h1>
+<div id="grid"></div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    const gridElement = document.getElementById("grid");
+    const usersData = JSON.parse(`{{ users | safe }}`);
+
+    new gridjs.Grid({
+        columns: ["Name", "Email", "Phone Number", "Address", "Created At"],
+        data: usersData.map(user => [
+            user.name,
+            user.email,
+            user.phone,
+            user.address,
+            user.created_at
+        ]),
+        sort: true,
+        search: true,
+        pagination: true
+    }).render(gridElement);
+
+</script>
+{% endblock %}
