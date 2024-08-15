@@ -1,0 +1,74 @@
+{% extends "./base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1>Server Side Table</h1>
+<div id="grid"></div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    const gridElement = document.getElementById("grid");
+
+    const updateUrl = (prev, query) => {
+        const [baseUrl, existingParams] = prev.split('?');
+        const newParams = new URLSearchParams(existingParams);
+        Object.keys(query).forEach(key => newParams.set(key, query[key]));
+        return `${baseUrl}?${newParams.toString()}`;
+    };
+
+    new gridjs.Grid({
+        columns: [
+            { id: 'name', name: 'Name' },
+            { id: 'email', name: 'Email' },
+            { id: 'phone', name: 'Phone' },
+            { id: 'address', name: 'Address' },
+            { id: 'created_at', name: 'Created At' },
+        ],
+        server: {
+            url: '/api/data',
+            then: result => result.data.map(user => [
+                user.name,
+                user.email,
+                user.phone,
+                user.address,
+                user.created_at
+            ]),
+            total: result => result.total,
+        },
+        search: {
+            enabled: true,
+            server: {
+                url: (prev, search) => {
+                    return updateUrl(prev, { search });
+                },
+            },
+        },
+        sort: {
+            enabled: true,
+            multiColumn: false,
+            server: {
+                url: (prev, columns) => {
+                    const columnsId = ['name', 'email', 'phone', 'address', 'created_at'];
+                    const column = columns[0];
+                    const sortBy = columnsId[column?.index];
+                    const dir = column?.direction === 1 ? 'asc' : 'desc';
+                    return updateUrl(prev, { sort: sortBy, dir: dir });
+                },
+            },
+        },
+        pagination: {
+            enabled: true,
+            limit: 10,
+            server: {
+                url: (prev, page, limit) => {
+                    return updateUrl(prev, { start: page * limit, length: limit });
+                },
+            },
+        },
+    }).render(gridElement);
+</script>
+{% endblock %}
