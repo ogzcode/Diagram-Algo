@@ -1,5 +1,5 @@
 # Flask-Gridjs Redesign
-I have redesigned the theme for Grid.js used for Data Tables and changed the icons.
+I have redesigned the theme for Grid.js used for Data Tables and changed the icons.Added code in server side table
 
 ## Usage
 
