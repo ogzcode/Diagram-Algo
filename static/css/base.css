@@ -1,0 +1,63 @@
+/* Varsayılan (Light Mode) Teması */
+:root {
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --nav-link-color: #333;
+    --nav-link-hover-color: #000;
+    --button-background-color: #333;
+    --button-text-color: #fff;
+    --button-hover-background-color: #555;
+}
+
+/* Dark Mode Teması */
+body.dark-mode {
+    --background-color: #333;
+    --text-color: #f0f0f0;
+    --nav-link-color: #f0f0f0;
+    --nav-link-hover-color: #bbb;
+    --button-background-color: #f0f0f0;
+    --button-text-color: #333;
+    --button-hover-background-color: #777;
+}
+
+/* Genel Stil Ayarları */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+#content {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--nav-link-color);
+    margin-right: 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: var(--nav-link-hover-color);
+}
+
+#toggle-mode {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#toggle-mode:hover {
+    background-color: var(--button-hover-background-color);
+}
