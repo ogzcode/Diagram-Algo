@@ -9,6 +9,7 @@ fake = Faker()
 
 def get_fake_user():
     return {
+        'id': fake.uuid4(),
         'name': fake.name(),
         'email': fake.email(),
         'phone': fake.phone_number(),
