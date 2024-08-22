@@ -2,6 +2,35 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+<style>
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn {
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-edit {
+        color: #0d9488;
+        background-color: #f0fdfa;
+    }
+
+    .btn-delete {
+        color: #ef4444;
+        background-color: #fee2e2;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -15,18 +44,54 @@
     const usersData = JSON.parse(`{{ users | safe }}`);
 
     new gridjs.Grid({
-        columns: ["Name", "Email", "Phone Number", "Address", "Created At"],
+        columns: [
+            {
+                name: "ID",
+                hidden: true
+            },
+            "Name", "Email", "Phone Number", "Address", "Created At",
+            {
+                name: "Actions",
+                sort: false,
+                formatter: (cell, row) => {
+                    return gridjs.html(`
+                    <div class="btn-container">
+                        <button class="btn btn-edit" data-id="${row.cells[0].data}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+                        </button>
+                        <button class="btn btn-delete" data-id="${row.cells[0].data}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                        </button>
+                    </div>
+                `);
+                }
+            }
+        ],
         data: usersData.map(user => [
+            user.id,
             user.name,
             user.email,
             user.phone,
             user.address,
-            user.created_at
+            user.created_at,
+            null
         ]),
         sort: true,
         search: true,
         pagination: true
     }).render(gridElement);
+
+    gridElement.addEventListener('click', function (event) {
+        const target = event.target;
+        if (target.classList.contains('btn-edit')) {
+            const userId = target.getAttribute('data-id');
+            console.log(`Edit User ID: ${userId}`);
+        }
+        if (target.classList.contains('btn-delete')) {
+            const userId = target.getAttribute('data-id');
+            console.log(`Delete User ID: ${userId}`);
+        }
+    });
 
 </script>
 {% endblock %}
